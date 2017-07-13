@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,user-scalable=no"/>
+    <meta name="viewport" content="width=device-width,user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/iconfont.css" th:href="@{/css/iconfont.css}"/>
+    <script type="text/javascript" src="../../static/js/jquery-1.10.2.min.js" th:src="@{/js/jquery-1.10.2.min.js}"></script>
+    <script type="text/javascript" src="../../static/js/bootstrap.js" th:src="@{/js/bootstrap.js}"></script>
+    <script type="text/javascript" src="../../static/js/jedate.js" th:src="@{/js/jedate.js}"></script>
+    <link rel="stylesheet" href="../../static/teacher/css/index.css" th:href="@{/teacher/css/index.css}"/>
+    <script src="../../static/js/index.js" type="text/javascript" th:src="@{/js/index.js}"></script>
+    <script src="../../static/ckeditor/ckeditor.js" type="text/javascript" th:src="@{/ckeditor/ckeditor.js}"></script>
+    <script type="text/javascript" src="../../static/teacher/js/tea_newsAD.js" th:src="@{/teacher/js/tea_newsAD.js}" ></script>
+    <style type="text/css">
+    	label{
+    		font-weight: normal;
+    	}
+    	.preview img{
+        	width: 100%;
+        	max-height: 320px;
+        }
+    </style>
+    <!--[if lte IE 9]>
+    <script src="../../static/company/js/respond.js" th:src="@{/company/js/respond.js}"></script>
+    <script src="../../static/company/js/html5shiv.min.js" th:src="@{/company/js/html5shiv.min.js}"></script>
+    <![endif]-->
+</head>
+<body style="min-width: 1000px;">
+<nav class="navbar navbar-default navbar-fixed-top titleNav">
+    <div class="navbar-header">
+        <a th:href="@{/}" class="btn hidden-xs"><img src="../../static/img/test.png"  th:src="@{/img/test.png}" style="width:150px"/></a>
+        <h2 class="btn btn-title ">大连理工大学就业管理与服务平台</h2>
+    </div>
+    <div class=" navbar-collapse  collapse">
+        <ul class="nav navbar-nav navbar-right ">
+            <li><a th:text="${session.user.depName}" th:data-id="${session.user.id}" id="identity">我是教师</a></li>
+            <li class="logout"><a><span class="glyphicon glyphicon-off"></span></a></li>
+            <li><a></a></li>
+        </ul>
+    </div>
+
+</nav>
+<section class="container-fluid con">
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="z-index: 999;">
+            <div>
+                <aside class="aside">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><a th:href="@{/}"><span class="iconfont icon-shouye"></span>我的主页</a></li>
+                        <li><a th:href="@{/teacher/tea_agreementReview.html}"><span class="iconfont icon-qianyuequerenqianyuedianziqianyue"></span>签约审核</a></li>
+                        <li><a th:href="@{/teacher/tea_absentReview.html}"><span class="iconfont icon-weiyue"></span>违约审核</a></li>
+                        <!--<li><a th:href="@{/teacher/teaEmploymentLook.html}"><span class="iconfont icon-"></span>派遣查询</a></li>-->
+                        <li th:if="${(session.user.principal  eq 'SCHOOL') or  (session.user.principal eq 'SCHADMIN')}"><a th:href="@{/teacher/listRessignApplication.html}" ><span class="iconfont icon-paidan"></span>改派查询</a></li>
+                        <li><a th:href="@{/teacher/teaEnrollment.html }"><span class="iconfont icon-xuesheng"></span>生源信息</a></li>
+                        <li><a th:href="@{/teacher/job.html}" ><span class="iconfont icon-quxiang"></span>派遣查询</a></li>
+                        <li><a th:href="@{/teacher/teaBlankBook}" ><span class="iconfont icon-agreement"></span>空白协议书</a></li>
+                        <li><a th:href="@{/teacher/teaDepartStusAudit.html}" ><span class="iconfont icon-xuejiguanli"></span>学籍审核</a></li>
+                        <li><a th:href="@{/teacher/stuInfoFile.html}" ><span class="iconfont icon-xuejiguanli"></span>信息导入</a></li>
+                        <li class="active"><a th:href="@{/teacher/teaNews.html}" ><span class="iconfont icon-xuejiguanli"></span>新闻信息</a></li>
+                        <li><a th:href="@{/teacher/}" ><span class="iconfont icon-xuejiguanli"></span>招聘需求审核</a></li>
+                        <li><a th:href="@{/teacher/tea_venue.html}" ><span class="iconfont icon-xuejiguanli"></span>场地租用审核</a></li>
+                        <li><a th:href="@{/teacher/tea_company.html}" ><span class="iconfont icon-xuejiguanli"></span>企业信息审核</a></li>
+                        <li><a th:href="@{/teacher/logoList}" ><span class="iconfont icon-xuejiguanli"></span>合作企业logo</a></li>
+                        <li th:if="${(session.user.principal  eq 'SCHOOL') or  (session.user.principal eq 'SCHADMIN')}"><a th:href="@{/teacher/listCode.html}" ><span class="iconfont icon-tongyibianma"></span>编码表</a></li>
+                    </ul>
+                </aside>
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+            <div class="main">
+                <h3>修改新闻</h3>
+                <div class="bgColor col-lg-12 col-md-12 col-sm-12 col-xs-12 form-horizontal" style="padding-top: 20px;padding-bottom: 25px;">
+                    <form action="/app/teacher/update/news"  method="post" enctype="multipart/form-data">
+                        <div class="row">
+                           <div class="form-group" >
+                                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2  control-label">新闻标题</label>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                    <input type="hidden" name="id" th:value="${news.id}"/>
+                                    <input type="text"  class="form-control" name="title" th:value="${news.title}"/>
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2  control-label">新闻副标题</label>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                    <input type="text"  class="form-control" name="subTitle" th:value="${news.subTitle}"/>
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2  control-label">新闻栏目</label>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                    <select name="newsColumn" class="form-control" >
+                                        <option th:each="column, columns : ${newsColumn}" th:value="${column.key}" th:text="${column.value}" th:selected="${news.newsColumn == column.key} ">[[${column.value}]]</option>
+                                    </select>
+                                </div>
+                                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2  control-label">新闻排序编号</label>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                    <input type="text" name="sortNo" class="form-control" th:value="${news.sortNo}"/>
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2  control-label">新闻发布日期</label>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                    <input class="datainp form-control" id="datebut" type="text" name="publishDate"  th:value="${news.publishDate}" style="background-color: #fff;"  placeholder="请选择时间" readonly onClick="jeDate({dateCell:'#datebut',isTime:true,format:'YYYY-MM-DD'})" >
+                                </div>
+                                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2  control-label">排序到期日</label>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                    <input class="datainp form-control" id="datebut3" type="text" name="sortEndDate" th:value="${news.sortEndDate}" style="background-color: #fff;" placeholder="请选择时间"  readonly onClick="jeDate({dateCell:'#datebut3',isTime:true,format:'YYYY-MM-DD'})" >
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                 <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2  control-label">是否设置有效期</label>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                	<label class="control-label" for="y"><span>是</span><input type="radio" name="have" id="y" th:checked="${news.endDate != null}" value="true" /></label>
+                                	<label class="control-label" for="n"><span>否</span><input type="radio" name="have" id="n" th:checked="${news.endDate == null}" value="false"/></label>
+                                </div>
+                                <div class="validity">
+	                                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2  control-label">新闻结束日期</label>
+	                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+	                                    <input class="datainp form-control" id="datebut2" type="text" name="endDate" th:value="${news.endDate}" style="background-color: #fff;" placeholder="请选择时间"  readonly onClick="jeDate({dateCell:'#datebut2',isTime:true,format:'YYYY-MM-DD'})" >
+	                                </div>
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2  control-label">是否置顶</label>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                	<label class="control-label" for="yes"><span>是</span><input type="radio" name="isTop" th:checked="${news.isTop ==true}" value="true" id="yes" /></label>
+                                	<label class="control-label" for="no"><span>否</span><input type="radio" name="isTop" th:checked="${news.isTop ==false}" value="false" id="no" /></label>
+                                </div>
+                                <div class="stale">
+                                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2  control-label">置顶过期时间</label>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                        <input class="datainp form-control" id="datebut4" type="text" name="topEndDate" th:value="${news.topEndDate}"  style="background-color: #fff;" placeholder="请选择时间"  readonly onClick="jeDate({dateCell:'#datebut4',isTime:true,format:'YYYY-MM-DD'})" >
+                                    </div>
+                                </div>
+                            </div>
+                             <div  class="form-group">
+                        	<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2  control-label">是否设置轮播图</label>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            	<label class="control-label" for="yes"><span>是</span><input type="radio" name="isBanner" th:checked="${news.isBanner ==true}" value="true" id="yes" /></label>
+                            	<label class="control-label" for="no"><span>否</span><input type="radio" name="isBanner" th:checked="${news.isBanner ==false}" value="false" id="no" /></label>
+                            </div>
+                        </div>
+                        <div class="banner">
+	                        <div class="form-group" >
+	                            <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2  control-label">轮播图上传</label>
+	                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+	                                <input type="file" name="file" id="file"><span style="color: red;"></span>
+	                            </div>
+	                            <div class="preview col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                     <img th:src="${news.banner}">
+								</div>
+	                        </div>
+                        </div>
+                        </div>
+                       
+                        <div class="row">
+                            <div class="form-group" >
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <!--这里开始编辑文本-->
+                                    <textarea id="TextArea1" name="content" cols="20" rows="2" class="ckeditor"  th:text="${news.content}" ></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2  col-md-2 col-sm-2 col-xs-2 col-lg-offset-5 col-md-offset-5 col-sm-offset-5 col-xs-offset-5">
+                                <input type="submit" class=" btn btn-primary form-control" id="publish" value="提交"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal fade " id="tc" tabindex="-1">  <!--模态框声明-->
+                    <div class="modal-dialog"> <!--模态框窗口-->
+                        <div class="modal-content"> <!--模态框内容-->
+                            <div class="modal-header">
+                                <button class="close" data-dismiss="modal"><span>&times;</span></button>
+                            </div>
+                            <div class="modal-body clearfix">
+                                <div class="col-lg-12" style="margin-bottom: 20px;">
+                                    <label id="label" class="col-lg-12"></label>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

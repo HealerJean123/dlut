@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html  class="no-js" lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,user-scalable=no"/>
+    <meta name="viewport" content="width=device-width,user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+<link rel="stylesheet" href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+<link rel="stylesheet" href="../../static/teacher/css/index.css" th:href="@{/teacher/css/index.css}"/>
+<link rel="stylesheet" type="text/css" href="../../static/student/css/stu_apply.css" th:href="@{/student/css/stu_apply.css}"/>
+<link rel="stylesheet" type="text/css" href="../../static/student/css/stu_look.css" th:href="@{/student/css/stu_look.css}"/>
+<link rel="stylesheet" type="text/css" href="../../static/css/iconfont.css" th:href="@{/css/iconfont.css}"/>
+<script type="text/javascript" src="../../static/js/jquery-1.10.2.min.js"  th:src="@{/js/jquery-1.10.2.min.js}"></script>
+<script type="text/javascript" src="../../static/js/bootstrap.js"  th:src="@{/js/bootstrap.js}"></script>
+<script src="../../static/js/index.js" type="text/javascript" th:src="@{/js/index.js}"></script>
+    <!--[if lte IE 9]>
+	<script src="../../static/company/js/respond.js" th:src="@{/company/js/respond.js}"></script>
+	<script src="../../static/company/js/html5shiv.min.js" th:src="@{/company/js/html5shiv.min.js}"></script>
+<![endif]-->
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top titleNav">
+    <div class="navbar-header">
+        <a th:href="@{/}" class="btn hidden-xs"><img src="../../static/img/test.png" th:src="@{/img/test.png}" style="width:150px"/></a>
+        <h2 class="btn btn-title ">大连理工大学就业管理与服务平台</h2>
+    </div>
+    <div class=" navbar-collapse  collapse">
+        <ul class="nav navbar-nav navbar-right ">
+            <li ><a th:text="${session.user.depName}" th:data-id="${session.user.id}" id="identity">教师</a></li>
+            <li class="logout"><a><span class="glyphicon glyphicon-off"></span></a></li>
+            <li><a></a></li>
+        </ul>
+    </div>
+
+</nav>
+<section class="container-fluid con">
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="z-index: 999;">
+            <div>
+                <aside class="aside">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><a th:href="@{/}"><span class="iconfont icon-shouye"></span>我的主页</a></li>
+                        <li><a th:href="@{/teacher/tea_agreementReview.html}"><span class="iconfont icon-qianyuequerenqianyuedianziqianyue"></span>签约审核</a></li>
+                        <li><a th:href="@{/teacher/tea_absentReview.html}"><span class="iconfont icon-weiyue"></span>违约审核</a></li>
+                        <!--<li><a th:href="@{/teacher/teaEmploymentLook.html}"><span class="iconfont icon-"></span>派遣查询</a></li>-->
+                        <li th:if="${(session.user.principal  eq 'SCHOOL') or  (session.user.principal eq 'SCHADMIN')}"><a th:href="@{/teacher/listRessignApplication.html}" ><span class="iconfont icon-paidan"></span>改派查询</a></li>
+                        <li><a th:href="@{/teacher/teaEnrollment.html }"><span class="iconfont icon-xuesheng"></span>生源信息</a></li>
+                        <li><a th:href="@{/teacher/job.html}" ><span class="iconfont icon-quxiang"></span>派遣查询</a></li>
+                        <li><a th:href="@{/teacher/teaBlankBook}" ><span class="iconfont icon-agreement"></span>空白协议书</a></li>
+                        <li><a th:href="@{/teacher/teaDepartStusAudit.html}" ><span class="iconfont icon-xuejiguanli"></span>学籍审核</a></li>
+                        <li><a th:href="@{/teacher/stuInfoFile.html}" ><span class="iconfont icon-xuejiguanli"></span>信息导入</a></li>
+                        <li><a th:href="@{/teacher/teaNews.html}" ><span class="iconfont icon-xuejiguanli"></span>新闻信息</a></li>
+                        <li><a th:href="@{/teacher/}" ><span class="iconfont icon-xuejiguanli"></span>招聘需求审核</a></li>
+                        <li><a th:href="@{/teacher/tea_venue.html}" ><span class="iconfont icon-xuejiguanli"></span>场地租用审核</a></li>
+                        <li><a th:href="@{/teacher/tea_company.html}" ><span class="iconfont icon-xuejiguanli"></span>企业信息审核</a></li>
+                        <li><a th:href="@{/teacher/logoList}" ><span class="iconfont icon-xuejiguanli"></span>合作企业logo</a></li>
+                        <li th:if="${(session.user.principal  eq 'SCHOOL') or  (session.user.principal eq 'SCHADMIN')}"><a th:href="@{/teacher/listCode.html}" ><span class="iconfont icon-tongyibianma"></span>编码表</a></li>    
+                    </ul>
+                </aside>
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+            <div class="main">
+				<h3>派遣详情</h3>
+				<form action="" method="post" class="bgColor col-lg-7 col-md-7 col-sm-7 col-xs-7 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2 form-horizontal" style="padding-bottom: 25px;">
+					<div class="row">
+						<div class="form-group">
+						<label class="col-lg-3 col-md-4 col-sm-4 col-xs-4 control-label">姓名：</label>
+						<div class="col-lg-7 col-md-6 col-sm-6 col-xs-6">
+							<input  readonly class="form-control"   type="text" th:value="${}" name="stuName"  />
+						</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+						<label class="col-lg-3 col-md-4 col-sm-4 col-xs-4 control-label">学号：</label>
+						<div class="col-lg-7 col-md-6 col-sm-6 col-xs-6">
+							<input  readonly class="form-control"   type="text" name="stuNo"  />
+						</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+						<label class="col-lg-3 col-md-4 col-sm-4 col-xs-4 control-label">院系：</label>
+						<div class="col-lg-7 col-md-6 col-sm-6 col-xs-6">
+							<input  readonly class="form-control"   type="text" th:value="${}" name="department"  />
+						</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+						<label class="col-lg-3 col-md-4 col-sm-4 col-xs-4 control-label">专业：</label>
+						<div class="col-lg-7 col-md-6 col-sm-6 col-xs-6">
+							<input  readonly class="form-control"   type="text" th:value="${}" name="majorCode"  />
+						</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+						<label class="col-lg-3 col-md-4 col-sm-4 col-xs-4 control-label">派遣单位：</label>
+						<div class="col-lg-7 col-md-6 col-sm-6 col-xs-6">
+							<input  readonly class="form-control"   th:value="${}" name="originalRecName" rows="4"  >
+						</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+						<label class="col-lg-3 col-md-4 col-sm-4 col-xs-4 control-label">派遣地址：</label>
+						<div class="col-lg-7 col-md-6 col-sm-6 col-xs-6">
+							<input  readonly class="form-control"   th:value="${}" name="originalAddress" rows="4"  >
+						</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+						<label class="col-lg-3 col-md-4 col-sm-4 col-xs-4 control-label">审核状态：</label>
+						<div class="col-lg-7 col-md-6 col-sm-6 col-xs-6">
+							<select name="" class="form-control">
+								<option value="">待审核</option>
+								<option value="">审核通过</option>
+								<option value="">审核不通过</option>
+							</select>
+						</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+						<label class="col-lg-3 col-md-4 col-sm-4 col-xs-4 control-label">院系意见：</label>
+						<div class="col-lg-7 col-md-6 col-sm-6 col-xs-6">
+							<textarea style="resize: none;" name="" rows="3" class="form-control"></textarea>
+						</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-3  col-md-3 col-sm-3 col-lg-offset-3  col-md-offset-3 col-sm-offset-3 col-xs-3 col-xs-offset-3">
+							<input type="button"  value="提交" class="btn btn-primary form-control" />
+						</div>
+					</div>
+				</form>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

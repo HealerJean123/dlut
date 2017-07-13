@@ -1,0 +1,30 @@
+spring:
+  profiles:
+    active: dev
+  thymeleaf:
+    mode: HTML
+  resources:
+  mvc:
+    favicon:
+      enabled: false
+  datasource:
+      url : jdbc:postgresql://localhost:5432/postgres?useUnicode=true&characterEncoding=UTF-8
+      username : postgres
+      password : postgres
+#      q3nzqd63jrk3gvqmdtzc6ui33mqiefj6
+      driverClassName : org.postgresql.Driver
+  jpa:
+    database : postgresql
+    hibernate:
+      ddl-auto : none
+    properties:
+      hibernate:
+        dialect: cn.edu.dlut.career.util.JsonPostgreSQLDialect
+server:
+  port: 8081
+  context-path: /app
+
+#文件服务器配置路径
+file:
+    url: ${FILE_SERVER_URL_PREFIX:http://192.168.1.250:80/st/images/pictures/dult}
+    path: ${FILE_SERVER_PATH_PREFIX:/home/wwwroot/minixiao/resources/images/pictures/dult}

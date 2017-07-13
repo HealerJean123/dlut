@@ -1,0 +1,26 @@
+body{
+	background: url(../../img/timg.png) no-repeat;
+	background-size:cover;
+	width: 100%;
+	height: 100%;
+	/*color:#fff;*/
+}
+p{
+	font-size: 20px;
+}
+.succForm{
+	margin:150px auto;
+	max-width: 390px;
+	position: relative;
+	background: rgba(255,255,255,0.8);
+	border-radius:5px ;
+	padding:15px 35px;
+}
+.signup-title{
+	position: absolute;
+	top:-60px;
+	left: 0;
+	text-align: center;
+	width: 100%;
+	color:yellow;
+}

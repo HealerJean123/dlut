@@ -1,0 +1,98 @@
+body,p,form,input,h2,h3{
+	margin:0
+}
+body{
+	min-width: 1300px;
+	background: #eaeff3;
+}
+h2{
+	font-family: "HiraginoSansGB-W3";
+}
+a{
+	text-decoration: none;
+	color:#000;
+}
+img{
+	margin: 0;
+}
+ul{
+	list-style: none;
+}
+/*----用人单位----------------------------------*/
+.btn-title{
+	font-size: 22px;
+	border-left:1px solid #eee;
+	color: #2570B5;
+}
+.con{
+	margin-top:64px;
+}
+/*.con .row{
+	background: #eaeff3;
+}*/
+.aside a{
+	color: #fff;
+}
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
+	background-color: #0b63af;
+}
+.con ul li a:hover{
+	background: #004379;
+}
+.aside{
+	position: fixed;
+	left: -0px;
+	top:55px;
+	width:13%;
+	min-width: 180px;
+	height: 100%;
+	padding-top: 30px;
+	background: #0073BB;
+}
+.aside li{
+	text-indent: 2em;
+}
+h3{
+	font:20px/51px "微软雅黑"	;
+	color: #555;
+}
+.sx{
+	margin-top: 20px;
+}
+.bgColor,.titleNav{
+	background: #fff;
+}
+.bgColor{
+	border-radius: 6px;
+}
+#identity{
+	padding-right:0 ;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+	vertical-align: middle;
+}
+.table{
+	margin-bottom:0
+}
+.iconfont{
+	/*position: absolute;
+	left: 15%;*/
+}
+.main{
+	padding-right: 4%;
+}
+.do{
+	font-size: 22px;
+}
+.thing{
+	padding:0px; font-size:19px
+}
+
+.thing a{display: block;padding-top: 20px;}
+.main ul li a:hover{
+	background:#d9edf7;
+}
+
+.form-control[readonly]{
+    background-color: #fff;
+}

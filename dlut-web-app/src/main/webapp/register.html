@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,user-scalable=no"/>
+		<title>大连理工大学-企业用户注册</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<link rel="stylesheet" type="text/css" href="css/register.css"/>
+		<link rel="stylesheet" type="text/css" href="css/bootstrapValidator.css"/>
+		<script src="js/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.js" type="text/javascript"></script>
+		<script type="text/javascript" src="js/bootstrapValidator.js"></script>
+		<script src="js/upload.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<section class="container">
+			<form class="form-signin" id="defaultForm">
+				<h2 class="signin-title">企业注册</h2>
+				<div class="input-wrap">
+					<div class="row">
+						<div class="col-lg-12 form-group">
+							<label class="control-label">单位名称</label>
+							<div class="position">
+								<input type="text" class="form-control" name="companyName" placeholder="请输入单位全称(营业执照或组织机构代码证上一致)"/>
+							</div>
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 form-group">
+							<label class="control-label">组织机构代码</label>
+							<div class="position">
+								<input type="text" name="organization" class="form-control" placeholder="或社会信用代码"/>
+							</div>
+						</div>
+						<div class="col-lg-6 col-md-6  col-sm-6 form-group">
+							<label class="control-label">主管部门</label>
+							<select class="form-control">
+								<option value="">请选择主管部门</option>
+							</select>
+						</div>
+						<div class="col-lg-6 col-md-6  col-sm-6 form-group">
+							<label class="control-label">单位行业</label>
+							<select class="form-control">
+								<option value="">请选择单位行业</option>
+							</select>
+						</div>
+						<div class="col-lg-6 col-md-6  col-sm-6 form-group">
+							<label class="control-label">单位类型</label>
+							<select class="form-control">
+								<option value="">请选择单位类型</option>
+							</select>
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 form-group">
+							<label class="control-label">单位规模</label>
+							<select class="form-control">
+								<option value="">请选择公司规模</option>
+							</select>
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 form-group">
+							<label class="control-label">注册资金</label>
+							<select class="form-control">
+								<option value="">请选择公司注册资金</option>
+							</select>
+						</div>
+						<div class="col-lg-12 form-group">
+							<label class="control-label">单位地址</label>
+							<div class="row">
+								<div class="col-lg-2 col-md-2 col-sm-2">
+									<select class="form-control">
+										<option  value="">省/市</option>
+									</select>
+								</div>
+								<div class="col-lg-10 col-md-10 col-sm-10">
+									<input type="text" class="form-control" placeholder="详细地址"/>
+								</div>
+								
+							</div>
+						</div>
+						<div class="col-lg-12 form-group">
+							<label class="control-label">单位网址</label>
+							<div class="position">
+								<input type="text" name="website" class="form-control" placeholder="http://或https://开始的网址"/>
+							</div>
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 form-group">
+							<label class="control-label">联系人</label>
+							<div class="position">
+								<input type="text" name="linkman" class="form-control" placeholder="请输入联系人姓名"/>
+							</div>
+						</div>
+						<div class="col-lg-6 col-md-6  col-sm-6 form-group">
+							<label class="control-label">电子邮箱</label>
+							<div class="position">
+								<input type="text" class="form-control" name="email" placeholder="请输入联系人电子邮箱"/>
+							</div>
+							<div class="alert alert-danger" style="display: none;"></div>
+						</div>
+						<div class="col-lg-6 col-md-6  col-sm-6 form-group">
+							<label class="control-label">移动电话</label>
+							<div class="position">
+								<input type="text" name="phone" class="form-control"  placeholder="请输入联系人手机号码"/>
+							</div>
+							<div class="alert alert-danger" style="display: none;"></div>
+						</div>
+						<div class="col-lg-6 col-md-6  col-sm-6 form-group">
+							<label class="control-label">固定电话</label>
+							<div class="position">
+								<input type="text" name="tel" class="form-control" placeholder="请输入办公电话"/>
+							</div>
+							<div class="alert alert-danger" style="display: none;"></div>
+						</div>
+						<div class="col-lg-6 col-md-6  col-sm-6 form-group">
+							<label class="control-label">登录密码</label>
+							<div class="position">
+								<input type="password" name="password" class="form-control" placeholder="请输入登录密码"/>
+							</div>
+						</div>
+						<div class="col-lg-6 col-md-6  col-sm-6 form-group">
+							<label class="control-label" >确认密码</label>
+							<div class="position">
+								<input type="password" name="confirmPassword"  class="form-control" placeholder="请再输入一次登录代码"/>
+							</div>
+							<div class="alert alert-danger" style="display: none;"></div>
+						</div>
+						<div class="col-lg-12 form-group">
+							<label class="control-label">单位简介</label>
+							<div class="position">
+								<textarea type="text" class="form-control" rows="3" ></textarea>
+							</div>
+						</div>
+						<div class="col-lg-12 form-group">
+							<label class="control-label">组织机构代码证或社会新红图片上传</label>
+						    <input type="file" id="file">
+							<div class="preview">
+								<ul>
+									
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-12 checkbox">
+							<label>
+								<input class="pull-left" name="acceptTerms" type="checkbox"/>我已经阅读并确认<a href="#">协议</a>
+							</label>
+						</div>
+						<div class="col-lg-12">
+							<button class="btn btn-primary btn-block" id="btn">注册</button>
+							
+						</div>
+					</div>
+					
+				</div>
+			</form>
+		</section>
+		
+		<script type="text/javascript" src="js/register.js"></script>
+	</body>
+</html>

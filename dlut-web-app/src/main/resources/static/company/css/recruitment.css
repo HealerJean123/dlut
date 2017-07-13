@@ -1,0 +1,41 @@
+.publish{
+	min-width:200px;
+}
+.publishNav{
+	padding-top: 30px;
+	padding-bottom: 30px;
+	/*padding-left: 30%;*/
+}
+.li-bg{
+	width: 100px;
+	height: 82px;
+	line-height: 82px;
+	background: url(../img/1.png);
+	text-align: center;
+}
+.publishNav .liActive{
+	background: url(../img/2.png);
+	
+}
+
+#pane{
+	background: #fff;
+	position: relative;
+	top: -300px;
+	left: 0;
+}
+.workRow{
+	position: relative;
+}
+.upDown{
+	overflow: hidden;
+}
+.close{
+	color: #000;
+	position: absolute;
+	right: 120px;
+	top: 94px;
+}
+.jumbotron{
+	background-color:#fff ;
+}

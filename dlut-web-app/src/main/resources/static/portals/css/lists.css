@@ -1,0 +1,22 @@
+.matter{
+	background: #fff;
+}
+
+.matter .detailsR{
+	width: 960px;
+}
+.matter .detailsR .title{
+	margin-left: 40px;
+}
+.matter .detailsRr{
+	width: 25%; padding-right: 40px;
+}
+.conList{
+	padding:0
+}
+.conList li{
+	width: 200px;
+	overflow: hidden; /*自动隐藏文字*/
+	text-overflow: ellipsis;/*文字隐藏后添加省略号*/
+	white-space: nowrap;/*强制不换行*/
+}

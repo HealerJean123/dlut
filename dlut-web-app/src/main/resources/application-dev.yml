@@ -1,0 +1,19 @@
+spring:
+  thymeleaf:
+    cache: false
+  mvc:
+    favicon:
+      enabled: false
+  datasource:
+     url : jdbc:postgresql://114.55.4.99:5432/dlut?useUnicode=true&characterEncoding=UTF-8
+     username : postgres
+     password : q3nzqd63jrk3gvqmdtzc6ui33mqiefj6
+  jpa:
+    show-sql : true
+    hibernate:
+      ddl-auto : update
+    properties:
+      hibernate:
+        dialect: cn.edu.dlut.career.util.JsonPostgreSQLDialect
+server:
+    port: 8081

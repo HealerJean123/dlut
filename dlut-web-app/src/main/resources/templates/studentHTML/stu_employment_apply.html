@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html  class="no-js" lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,user-scalable=no"/>
+    <meta name="viewport" content="width=device-width,user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+<link rel="stylesheet" href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+<link rel="stylesheet" href="../../static/student/css/index.css" th:href="@{/student/css/index.css}"/>
+<link rel="stylesheet" type="text/css" href="../../static/student/css/stu_apply.css" th:href="@{/student/css/stu_apply.css}"/>
+<link rel="stylesheet" type="text/css" href="../../static/css/iconfont.css" th:href="@{/css/iconfont.css}"/>
+<script type="text/javascript" src="../../static/js/jquery-1.10.2.min.js"  th:src="@{/js/jquery-1.10.2.min.js}"></script>
+<script type="text/javascript" src="../../static/js/bootstrap.js"  th:src="@{/js/bootstrap.js}"></script>
+<script src="../../static/js/index.js" type="text/javascript" th:src="@{/js/index.js}"></script>
+<!--[if lte IE 9]>
+	<script src="../../static/js/respond.js" th:src="@{/js/respond.js}"></script>
+	<script src="../../static/js/html5shiv.min.js" th:src="@{/js/html5shiv.min.js}"></script>
+<![endif]-->
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top titleNav">
+    <div class="navbar-header">
+        <a th:href="@{/}" class="btn hidden-xs"><img src="../../static/img/test.png" th:src="@{/img/test.png}" style="width:150px"/></a>
+        <h2 class="btn btn-title ">大连理工大学就业管理与服务平台</h2>
+    </div>
+    <div class=" navbar-collapse  collapse">
+        <ul class="nav navbar-nav navbar-right ">
+            <li ><a th:text="${session.user.depName}" th:data-id="${session.user.id}" id="identity">我是学生</a></li>
+            <li class="logout"><a><span class="glyphicon glyphicon-off"></span></a></li>
+            <li><a></a></li>
+        </ul>
+    </div>
+
+</nav>
+<section class="container-fluid con">
+    <div class="row"><div class="form-group">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="z-index: 999;">
+            <div>
+                <aside class="aside">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><a th:href="@{/}"><span class="iconfont icon-shouye"></span>我的主页</a></li>
+                        <li><a th:href="@{/student/stuInformation.html}"><span class="iconfont icon-xuejiguanli"></span>学籍信息</a></li>
+                        <li><a th:href="@{/}"><span class="iconfont icon-xieyi"></span>招聘需求</a></li>
+                        <li class="active"><a th:href="@{/student/JobDestination?stuId=}+${session.user.id}"><span class="iconfont icon-paidan"></span>我的派遣</a></li>
+                        <li><a th:href="@{/student/stu_offer.html}"><span class="iconfont icon-offer"></span>我的offer</a></li>
+                        <li><a th:href="@{/student/agreement.html}"><span class="iconfont icon-xieyi"></span>三方协议</a></li>
+                        <li><a th:href="@{/student/recruitmentQuery/stuRecruitment.html}"><span class="iconfont icon-xieyi"></span>招聘会</a></li>
+                   		<li><a th:href="@{/student/stuBlankBook}"><span class="iconfont icon-agreement"></span>空白协议书</a></li>
+                    </ul>
+                </aside>
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+            <div class="main">
+				<h3>改派申请</h3>
+				<form action="/app/student/addReassignApply" method="post" class="bgColor col-lg-7 col-md-7 col-sm-7 col-xs-7 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2 form-horizontal" style="padding-bottom: 25px;">
+					<div class="row">
+						<div class="form-group">
+						<label class="col-lg-3 col-md-4 col-sm-4 col-xs-4  control-label">姓名：</label>
+						<div class="col-lg-7 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" th:value="${graduateDestination.studentInfo.name}"  readonly name="stuName"  class="form-control"  />
+						</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+						<label class="col-lg-3 col-md-4 col-sm-4 col-xs-4  control-label">学号：</label>
+						<div class="col-lg-7 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" th:value="${graduateDestination.studentInfo.stuNo}" name="stuNo" readonly class="form-control"  />
+						</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+						<label class="col-lg-3 col-md-4 col-sm-4 col-xs-4  control-label">院系：</label>
+						<div class="col-lg-7 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" th:value="${#pubcode.codeName('academy',graduateDestination.studentInfo.departmentId)}"   name="departmentId"  readonly class="form-control"  />
+						</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+						<label class="col-lg-3 col-md-4 col-sm-4 col-xs-4  control-label">专业：</label>
+						<div class="col-lg-7 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" th:value="${#pubcode.codeName('major',graduateDestination.studentInfo.majorCode)}" name="majorCode" readonly class="form-control"  />
+						</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+						<label class="col-lg-3 col-md-4 col-sm-4 col-xs-4  control-label">原派遣单位：</label>
+						<div class="col-lg-7 col-md-6 col-sm-6 col-xs-6">
+                            <!--th:value="${jobDestination.recName}"-->
+                            <input th:value="${graduateDestination.recName}"   name="originalRecName" rows="4" readonly class="form-control" >
+						</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+						<label class="col-lg-3 col-md-4 col-sm-4 col-xs-4  control-label">原派遣地址：</label>
+						<div class="col-lg-7 col-md-6 col-sm-6 col-xs-6">
+                            <!--th:value="${jobDestination.recAddress}"-->
+							<input th:value="${graduateDestination.recAddress}"   name="originalAddress" rows="4" readonly class="form-control" >
+						</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+						<label class="col-lg-3 col-md-4 col-sm-4 col-xs-4  control-label">改派单位：</label>
+						<div class="col-lg-7 col-md-6 col-sm-6 col-xs-6">
+							<input name="recName" rows="4" class="form-control">
+						</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+						<label class="col-lg-3 col-md-4 col-sm-4 col-xs-4  control-label">改派原因：</label>
+						<div class="col-lg-7 col-md-6 col-sm-6 col-xs-6">
+                            <select id = "reason" name="reason"class="form-control">
+                                <option value="" selected>--改派原因：--</option>
+                                <option th:each="reason, reasons : ${allReassignReason}" th:value="${reason.key}" th:text="${reason.value}"></option>
+                            </select>
+						</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+						<label class="col-lg-3 col-md-4 col-sm-4 col-xs-4  control-label">申请理由：</label>
+						<div class="col-lg-7 col-md-6 col-sm-6 col-xs-6">
+							<textarea name="applyReason" rows="4" style="resize: none;" class="form-control"></textarea>
+						</div>
+						</div>
+					</div>
+					<div style="margin-top: 30px;" class="col-lg-3 col-md-3 col-sm-3 col-xs-3 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
+						<input type="submit" value="申请" class="btn btn-primary form-control"/>
+                    </div>
+
+				</form>
+
+            	<div class="modal fade " id="tc" tabindex="-1">  <!--模态框声明-->
+					<div class="modal-dialog"> <!--模态框窗口-->
+						<div class="modal-content"> <!--模态框内容-->
+							<div class="modal-header">
+								<button class="close" data-dismiss="modal"><span>&times;</span></button>
+							</div>
+							<div class="modal-body clearfix">
+								<form action="/app/student/updatePwd" method="post" class="form-horizontal">
+									<div class="col-lg-12" style="margin-bottom: 20px;">
+										<label id="label" class="col-lg-12"></label>
+									</div>
+								</form>
+							</div>
+							<div class="modal-footer">
+							</div>
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+</section>
+<script th:inline="JavaScript">
+    var errorMsg = [[${errorMsg}]];
+    if (errorMsg!=null) {
+        $("#tc").find("#label").html(errorMsg);
+		$("#tc").modal("show")
+    }
+</script>
+</body>
+</html>

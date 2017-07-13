@@ -1,0 +1,79 @@
+ $(document).ready(function(){
+ 	var stu_id="";
+ 	$("#btn").on("click",function(){//查询学生的信息
+ 		$.ajax({
+	 		type:"get",
+	 		url:"/app/company/findDynamic",
+	 		data:{
+	 			stuNo:$("input[name=stuNo]").val(),
+	 			mobilephone:$("input[name=mobilephone]").val(),
+	 			name:$("#name").val()
+	 		},
+	 		success:function(data){
+	 			var inner="";
+	 			$.each(data,function(i,e){
+	 				inner+='<tr><td>'+e.stuNo+'</td><td>'+e.name+'</td><td>'+e.genderName+'</td><td>'+e.majorName+'</td><td>'+e.eduYearName+'</td><td>'+e.eduDegreeName+'</td><td>'+e.majorName+'</td><td>'+e.homelandName+'</td><td>'+e.eduModeName+'</td><td>'+e.endDate+'</td><td><a class=" btn btn-default" href="/app/company/findStuOne?id='+e.id+'">详情</a></td><td><button class="fs btn btn-default" data-id="'+e.id+'">发送</button></td></tr>'
+	 			})
+	 			$("#tbody").html(inner);
+	 		},error:function(err){
+	 			console.log("失败！")
+	 		}
+	 	})
+ 	})
+ 	$("tbody").on("click",".fs",function(){//点击发送的时候
+ 		stu_id=$(this).attr("data-id");
+   		$("#tc").modal("show");
+ 		$("#tc").modal({
+   			show:false,
+ 			backdrop:false
+ 		});
+ 	})
+   	$("#btn0").on("click",function(){//查询模板类型
+ 		$.ajax({
+	 		type:"get",
+	 		url:"/app/company/showTemplate",
+	 		data:{
+	 			stuType:$("select[name=stuType]").val(),
+	 			name:$("#template").val(),
+	 		},
+	 		success:function(data){
+	 			var inner="";
+	 			$.each(data,function(i,e){
+	 				inner+='<tr><td>'+e.name+'</td><td>'+e.stuType+'</td><td>'+e.remarks+'</td><td><button class="goes btn btn-default" data-id="'+e.id+'">发送</button></td></tr>'
+	 			})
+	 			$("#tbody0").html(inner);
+	 		},error:function(err){
+	 			console.log("失败！")
+	 		}
+	 	})
+   	})
+   $("#tbody0").on("click",".goes",function(){//给学生发offer
+   	stu_id=$("input[name=id]").val()?$("input[name=id]").val():stu_id;
+   	$("#tc").modal("hide");
+   	template_id=$(this).attr("data-id");
+   		$.ajax({
+   			type:"post",
+   			url:"/app/company/sendOffer",
+   			data:{
+   				stuId:stu_id,
+   				templateId:template_id
+   			},
+   			success:function(data){
+   				if(data.message=="ok"){
+   				    $("#tcAlert").find("#label").html("发送成功！");
+					$("#tcAlert").modal("show")
+					$("#tcAlert").on("hidden.bs.modal",function(){
+						window.location.reload();
+					})
+   				}else if(data.message=="error"){
+   				    $("#tcAlert").find("#label").html("发送失败！");
+					$("#tcAlert").modal("show")
+   				}
+   			},
+   			error:function(err){
+   				console.log("shibai")
+   			}
+   		})
+   })
+
+ })

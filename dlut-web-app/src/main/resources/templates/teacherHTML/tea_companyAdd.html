@@ -1,0 +1,254 @@
+ <!DOCTYPE html>
+<html  class="no-js" lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width,user-scalable=no"/>
+<meta name="viewport" content="width=device-width,user-scalable=no"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+<link rel="stylesheet" href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+<link rel="stylesheet" href="../../static/teacher/css/index.css" th:href="@{/teacher/css/index.css}"/>
+<link rel="stylesheet" type="text/css" href="../../static/css/iconfont.css" th:href="@{/css/iconfont.css}"/>
+<script type="text/javascript" src="../../static/js/jquery-1.10.2.min.js"  th:src="@{/js/jquery-1.10.2.min.js}"></script>
+<script type="text/javascript" src="../../static/js/bootstrap.js"  th:src="@{/js/bootstrap.js}"></script>
+<script src="../../static/js/index.js" type="text/javascript" th:src="@{/js/index.js}"></script>
+<style type="text/css">
+	.form-control[readonly]{
+    	background-color: #fff;
+    	opacity: 1;
+    }
+</style>
+<!--[if lte IE 9]>
+	<script src="../../static/company/js/respond.js" th:src="@{/company/js/respond.js}"></script>
+	<script src="../../static/company/js/html5shiv.min.js" th:src="@{/company/js/html5shiv.min.js}"></script>
+
+<![endif]-->
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top titleNav">
+    <div class="navbar-header">
+        <a th:href="@{/}" class="btn hidden-xs"><img src="../../static/img/test.png" th:src="@{/img/test.png}" style="width:150px"/></a>
+        <h2 class="btn btn-title ">大连理工大学就业管理与服务平台</h2>
+    </div>
+    <div class=" navbar-collapse  collapse">
+        <ul class="nav navbar-nav navbar-right ">
+            <li ><a th:text="${session.user.depName}" th:data-id="${session.user.id}" id="identity">我是老师</a></li>
+            <li class="logout"><a><span class="glyphicon glyphicon-off"></span></a></li>
+            <li><a></a></li>
+        </ul>
+    </div>
+
+</nav>
+<section class="container-fluid con">
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="z-index: 999;">
+            <div>
+                <aside class="aside">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><a th:href="@{/}"><span class="iconfont icon-shouye"></span>我的主页</a></li>
+                        <li><a th:href="@{/teacher/tea_agreementReview.html}"><span class="iconfont icon-qianyuequerenqianyuedianziqianyue"></span>签约审核</a></li>
+                        <li><a th:href="@{/teacher/tea_absentReview.html}"><span class="iconfont icon-weiyue"></span>违约审核</a></li>
+                        <!--<li><a th:href="@{/teacher/teaEmploymentLook.html}"><span class="iconfont icon-"></span>派遣查询</a></li>-->
+                        <li th:if="${(session.user.principal  eq 'SCHOOL') or  (session.user.principal eq 'SCHADMIN')}"><a th:href="@{/teacher/listRessignApplication.html}" ><span class="iconfont icon-paidan"></span>改派查询</a></li>
+                        <li><a th:href="@{/teacher/teaEnrollment.html }"><span class="iconfont icon-xuesheng"></span>生源信息</a></li>
+                        <li><a th:href="@{/teacher/job.html}" ><span class="iconfont icon-quxiang"></span>派遣查询</a></li>
+                        <li><a th:href="@{/teacher/teaBlankBook}" ><span class="iconfont icon-agreement"></span>空白协议书</a></li>
+                        <li><a th:href="@{/teacher/teaDepartStusAudit.html}" ><span class="iconfont icon-xuejiguanli"></span>学籍审核</a></li>
+                      	<li><a th:href="@{/teacher/stuInfoFile.html}" ><span class="iconfont icon-xuejiguanli"></span>信息导入</a></li>
+                        <li><a th:href="@{/teacher/teaNews.html}" ><span class="iconfont icon-xuejiguanli"></span>新闻信息</a></li>
+                        <li><a th:href="@{/teacher/}" ><span class="iconfont icon-xuejiguanli"></span>招聘需求审核</a></li>
+                        <li><a th:href="@{/teacher/tea_venue.html}" ><span class="iconfont icon-xuejiguanli"></span>场地租用审核</a></li>
+                        <li class="active"><a th:href="@{/teacher/tea_company.html}" ><span class="iconfont icon-xuejiguanli"></span>企业信息审核</a></li>
+                        <li><a th:href="@{/teacher/logoList}" ><span class="iconfont icon-xuejiguanli"></span>合作企业logo</a></li>
+                        <li th:if="${(session.user.principal  eq 'SCHOOL') or  (session.user.principal eq 'SCHADMIN')}"><a th:href="@{/teacher/listCode.html}" ><span class="iconfont icon-tongyibianma"></span>编码表</a></li>    
+                    </ul>
+                </aside>
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+            <div class="main">
+				<h3>企业信息审核</h3>
+				<form action="" method="" class="form-horizontal bgColor " style="padding-top:25px; padding-bottom: 30px;">
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 control-label">单位编号</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" class="form-control" readonly/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 control-label" >登录ID</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" name="id" th:value="${companyInfo.id}" class="form-control" readonly />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 control-label" >单位名称</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" name="name" th:value="${companyInfo.name}" class="form-control" readonly/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 control-label">单位邮箱</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" name="email" th:value="${companyInfo.email}" class="form-control" readonly />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 control-label">组织机构代码</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" name="orgCode" th:value="${companyInfo.orgCode}" class="form-control" readonly/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 control-label">单位性质</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" class="form-control" readonly name="nature" th:value="${companyInfo.nature}"/>
+						</div>
+					</div>
+                    <div class="form-group">
+                        <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 control-label">注册资本</label>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <input type="text" class="form-control" readonly/>
+                        </div>
+                    </div>
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 control-label">单位行业</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" class="form-control" readonly/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 control-label">单位地区</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" name="city"  th:value="${companyInfo.city}" class="form-control" readonly/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 control-label">单位地址</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" name="address" th:value="${companyInfo.address}" class="form-control" readonly/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 control-label">单位联系部门</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" name="department" th:value="${companyInfo.department}" class="form-control" readonly/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 control-label">办公电话</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" name="fixedTelphone" th:value="${companyInfo.fixedTelphone}" class="form-control" readonly/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 control-label">单位邮编</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" name="zipCode" th:value="${companyInfo.zipCode}" class="form-control" readonly/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 control-label">单位规模</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" class="form-control" readonly/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 control-label">网址</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" name="website" th:value="${companyInfo.website}" class="form-control" readonly/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 control-label">单位联系人1</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" name="contacts" th:value="${companyInfo.contacts}" class="form-control" readonly/>
+						</div>
+						<!--<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">备注</div>-->
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 control-label">单位联系人1电话(手机)</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" name="telphone" th:value="${companyInfo.telphone}" class="form-control" readonly/>
+						</div>
+						<!--<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">备注</div>-->
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 control-label">单位联系人1邮箱</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input type="text" name="email" th:value="${companyInfo.email}" class="form-control" readonly/>
+						</div>
+						<!--<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">备注</div>-->
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 control-label">单位组织机构代码证上传</label>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<div class="col-lg-6 col-md-6  col-sm-6 col-xs-6 pull-left">
+									<img src="../../../../../classes/production/dlut-web-app/static/portals/img/2.png" style="width:100%" />
+							</div>
+						</div>
+						<!--<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">备注</div>-->
+					</div>
+					<div class="form-group">
+						<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+							<ul id="myTab" class="nav nav-tabs">
+							   <li class="active"><a href="#companyProfile" data-toggle="tab">公司简介</a></li>
+							   <li><a href="#information" data-toggle="tab">发票信息</a></li>
+							</ul>
+							<div id="myTabContent" class="tab-content">
+							   <div class="tab-pane fade in active" id="companyProfile">
+							      <textarea name="describe" readonly th:value="${companyInfo.describe}" style="resize: none;width: 100%;" rows="7">大连理工大学</textarea>
+							   </div>
+							   <div class="tab-pane fade" id="information">
+							     	<h4>发票信息</h4>
+							  		<div class="form-group">
+										<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 control-label">发票名头</label><!--------------------------------->
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+											<input type="text" class="form-control" readonly/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 control-label">单位税号</label><!--------------------------------->
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+											<input type="text" class="form-control" readonly/>
+										</div>
+									</div>
+							   </div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-2 col-lg-offset-4 col-md-2 col-md-offset-4 col-sm-2 col-sm-offset-4 col-xs-2 col-xs-offset-4">
+							<a class="btn btn-primary form-control">通过</a>
+						</div>
+						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 ">
+							<a class="btn btn-danger form-control" data-toggle="modal" data-target="#myModal">不通过</a>
+						</div>
+					</div>
+				</form>
+				<div class="modal fade " id="myModal" tabindex="-1">  <!--模态框声明-->
+					<div class="modal-dialog"> <!--模态框窗口-->
+						<div class="modal-content"> <!--模态框内容-->
+							<div class="modal-header">
+								<button class="close" data-dismiss="modal"><span>&times;</span></button>
+								<h4 class="modal-title">请输入不通过的原因</h4>
+							</div>
+							<div class="modal-body clearfix">
+
+									<div class="col-lg-12" style="margin-bottom: 20px;">
+										<textarea name="noPassReason" style="resize: none;" rows="3" class="form-control" readonly></textarea>
+									</div>
+									<a data-dismiss="modal" class="btn btn-default pull-right" >取消</a>
+									<button class="btn btn-primary pull-right noPassOk" >确认</button>
+							</div>
+							<div class="modal-footer">
+							</div>
+						</div>
+					</div>
+				</div>	
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

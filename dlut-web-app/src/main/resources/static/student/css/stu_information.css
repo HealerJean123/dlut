@@ -1,0 +1,23 @@
+.show2{
+	display: none;
+}
+.messag .form-control{
+	border:1px solid #f8f8f8;
+}
+.message,.mess{
+	margin-bottom: 30px;
+}
+.confirm{
+	padding: 40px;
+}
+footer{
+	margin-top: 20px;
+	
+}
+.message div{
+	height: 14px;
+	line-height: 34px;
+}
+.well{
+	background-color:#ffffcc ;
+}

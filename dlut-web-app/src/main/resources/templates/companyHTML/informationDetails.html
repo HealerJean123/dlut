@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,user-scalable=no" />
+		<meta name="viewport" content="width=device-width,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+		<link rel="stylesheet" href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+		<link rel="stylesheet" href="../../static/company/css/index.css" th:href="@{/company/css/index.css}" />
+		<link rel="stylesheet" href="../../static/company/css/information.css" th:href="@{/company/css/information.css}" />
+		<script type="text/javascript" src="../../static/js/jquery-1.10.2.min.js" th:src="@{/js/jquery-1.10.2.min.js}"></script>
+		<script type="text/javascript" src="../../static/js/bootstrap.js" th:src="@{/js/bootstrap.js}"></script>
+		<script type="text/javascript" src="../../static/company/js/index.js" th:src="@{/company/js/index.js}"></script>
+		<script src="../../static/company/js/unitInformation.js" type="text/javascript" th:src="@{/company/js/unitInformation .js}"></script>
+		<script src="../../static/js/index.js" type="text/javascript" th:src="@{/js/index.js}"></script>
+		<script type="text/javascript" src="../../static/company/js/enrollment.js" th:src="@{/company/js/enrollment.js}"></script>
+		<!--[if lte IE 9]>
+	<script src="../../static/company/js/respond.js" th:src="@{/company/js/respond.js}"></script>
+	<script src="../../static/company/js/html5shiv.min.js" th:src="@{/company/js/html5shiv.min.js}"></script>
+<![endif]-->
+	</head>
+
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top titleNav">
+			<div class="navbar-header">
+				<a th:href="@{/}" class="btn hidden-xs"><img src="../../static/img/test.png" th:src="@{/img/test.png}" style="width:150px" /></a>
+				<h2 class="btn btn-title ">大连理工大学就业管理与服务平台</h2>
+			</div>
+			<div class=" navbar-collapse  collapse">
+				<ul class="nav navbar-nav navbar-right ">
+					<li>
+						<a th:text="${session.user.depName}" th:data-id="${session.user.id}" id="identity">我是企业</a>
+					</li>
+					<li class="logout">
+						<a><span class="glyphicon glyphicon-off"></span></a>
+					</li>
+					<li>
+						<a></a>
+					</li>
+				</ul>
+			</div>
+
+		</nav>
+		<section class="container-fluid con">
+			<div class="row">
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="z-index: 999;">
+					<div>
+						<aside class="aside">
+							<ul class="nav nav-pills nav-stacked">
+								<li>
+									<a th:href="@{/company/recruitment.html}"><span class="iconfont icon-shouye"></span>招聘需求</a>
+								</li>
+								<li>
+									<a th:href="@{/}"><span class="iconfont icon-shouye"></span>招聘会预约</a>
+								</li>
+								<li>
+									<a th:href="@{/company/appointmentList.html}"><span class="iconfont icon-shouye"></span>专场招聘预约</a>
+								</li>
+								<li>
+									<a th:href="@{/}"><span class="iconfont icon-shouye"></span>场地租用</a>
+								</li>
+								<li>
+									<a th:href="@{/}"><span class="iconfont icon-shouye"></span>简历管理</a>
+								</li>
+								<li>
+									<a th:href="@{/company/offerHTML}"><span class="iconfont icon-shouye"></span>offer管理</a>
+								</li>
+								<li>
+									<a th:href="@{/company/agreementHtml}"><span class="iconfont icon-shouye"></span>签约管理</a>
+								</li>
+								<li>
+									<a th:href="@{/company/companyInfo?id=}+${session.user.depId}" id="info"><span class="iconfont icon-shouye"></span>单位信息维护</a>
+								</li>
+								<li class="active">
+									<a th:href="@{/company/enrollment.html}"><span class="iconfont icon-shouye"></span>生源查询</a>
+								</li>
+								<li><a th:href="@{/company/issuingOffer.html}"><span class="iconfont icon-shouye"></span>offer模板管理</a></li>
+							</ul>
+						</aside>
+					</div>
+				</div>
+				<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+					<div class="main" style="padding-right:4% ;">
+						<h3>学生详细信息</h3>
+						<div class="bgColor  form-horizontal" style="padding: 25px 0 25px 60px;">
+							<div class="row ">
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+									<div class="pull-left"> 姓名:&nbsp;&nbsp;&nbsp;&nbsp;</div>
+									<div class="show1">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+											<input type="hidden" name="id" th:value="${studentInfo.id}" />
+											<div th:text="${studentInfo.name}"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+									<div class="pull-left"> 性别:&nbsp;&nbsp;&nbsp;&nbsp;</div>
+									<div class="show1">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+											<div th:text="${#pubcode.codeName('gender',studentInfo.gender)}">女</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+									<div class="pull-left"> 学历:&nbsp;&nbsp;&nbsp;&nbsp;</div>
+									<div class="show1">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+											<div th:text="${#pubcode.codeName('eduDegree',studentInfo.eduDegree)}"></div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+									<div class="pull-left"> 身份证号:&nbsp;&nbsp;&nbsp;&nbsp;</div>
+									<div class="show1">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+											<div th:text="${studentInfo.idCard}"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+									<div class="pull-left">学号:&nbsp;&nbsp;&nbsp;&nbsp;</div>
+									<div class="show1">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+											<div th:text="${studentInfo.stuNo}"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+									<div class="pull-left">出生日期:&nbsp;&nbsp;&nbsp;&nbsp;</div>
+									<div class="show1">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+											<div th:text="${studentInfo.birthdate}"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+									<div class="pull-left">政治面貌:&nbsp;&nbsp;&nbsp;&nbsp;</div>
+									<div class="show1">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+											<div th:text="${#pubcode.codeName('political',studentInfo.political)}"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+									<div class="pull-left">民族:&nbsp;&nbsp;&nbsp;&nbsp;</div>
+									<div class="show1">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+											<div th:text="${#pubcode.codeName('ethnic',studentInfo.ethnic)}"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+									<div class="pull-left tips">生源地:&nbsp;&nbsp;&nbsp;&nbsp;</div>
+									<div class="show1">
+										<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 content" style="padding: 0;">
+											<div th:text="${studentInfo.homelandName}"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+									<div class="pull-left">所在院系:&nbsp;&nbsp;&nbsp;&nbsp;</div>
+									<div class="show1">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+											<div th:text="${#pubcode.codeName('academy',studentInfo.departmentId)}"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+									<div class="pull-left">专业:&nbsp;&nbsp;&nbsp;&nbsp;</div>
+									<div class="show1">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+											<div th:text="${#pubcode.codeName('major',studentInfo.majorCode)}"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+									<div class="pull-left">导师:&nbsp;&nbsp;&nbsp;&nbsp;</div>
+									<div class="show1">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+											<div th:text="${studentInfo.tutorName}"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+									<div class="pull-left">就读时间:&nbsp;&nbsp;&nbsp;&nbsp;</div>
+									<div class="show1">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+											<div th:text="${studentInfo.startDate}" ></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+									<div class="pull-left">学制:&nbsp;&nbsp;&nbsp;&nbsp;</div>
+									<div class="show1">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+											<div th:text="${#pubcode.codeName('eduYear',studentInfo.eduYear)}"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+									<div class="pull-left">所在班级:&nbsp;&nbsp;&nbsp;&nbsp;</div>
+									<div class="show1">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+											<div th:text="${studentInfo.className}"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+									<div class="pull-left">语种1:&nbsp;&nbsp;&nbsp;&nbsp;</div>
+									<div class="show1">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+											<div th:text="${#pubcode.codeName('language',studentInfo.flangType)}"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+									<div class="pull-left">语种2:&nbsp;&nbsp;&nbsp;&nbsp;</div>
+									<div class="show1">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+											<div th:text="${#pubcode.codeName('language',studentInfo.flangType2)}"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+									<div class="pull-left">辅导员:&nbsp;&nbsp;&nbsp;&nbsp;</div>
+									<div class="show1">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+											<div th:text="${studentInfo.counselor}"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+									<div class="pull-left">培养方式:&nbsp;&nbsp;&nbsp;&nbsp;</div>
+									<div class="show1">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+											<div th:text="${#pubcode.codeName('eduMode',studentInfo.eduMode)}"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+									<div class="pull-left">定向或委培单位:&nbsp;&nbsp;&nbsp;&nbsp;</div>
+									<div class="show1">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+											<div th:text="${studentInfo.trustee}" ></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 message">
+									<div class="pull-left">户口是否转入学校:&nbsp;&nbsp;&nbsp;&nbsp;</div>
+									<div class="show1">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+											<div class="val"><span th:if="${studentInfo.haveEduHukou eq '0'}" >
+                                        <input type="text" th:value="否" style="background: rgba(255,255,255,0); border: none;"/>
+                                    </span>
+                                                <span th:if="${studentInfo.haveEduHukou eq '1' }" >
+                                        <input type="text" th:value="是"  style="background: rgba(255,255,255,0); border: none;"/>
+                                    </span></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="clearfix" style="border-top:1px solid #D2D2D2;margin-bottom: 10px;"></div>
+							<div class="row">
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+									<div class="pull-left">电子邮箱:&nbsp;&nbsp;&nbsp;&nbsp;</div>
+									<div class="show1">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+											<div th:text="${studentInfo.email}"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+									<div class="pull-left">手机号码:&nbsp;&nbsp;&nbsp;&nbsp;</div>
+									<div class="show1">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+											<div th:text="${studentInfo.mobilephone}"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+									<div class="pull-left">家庭电话:&nbsp;&nbsp;&nbsp;&nbsp;</div>
+									<div class="show1">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+											<div th:text="${studentInfo.homePhone}"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+									<div class="pull-left">qq号:&nbsp;&nbsp;&nbsp;&nbsp;</div>
+									<div class="show1">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+											<div th:text="${studentInfo.qqNo}"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+									<div class="pull-left">微信号:&nbsp;&nbsp;&nbsp;&nbsp;</div>
+									<div class="show1">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+											<div  th:text="${studentInfo.wechatNo}"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+						<div class="row" style="padding-top:20px;padding-bottom: 30px;">
+							<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-5 col-md-offset-5 col-sm-offset-5 col-xs-offset-5">
+								<button class="btn btn-primary form-control"  data-toggle="modal" data-target="#tc">发送offer</button>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade in" id="tc" tabindex="-1">
+							<!--模态框声明-->
+							<div class="modal-dialog modal-lg">
+								<!--模态框窗口-->
+								<div class="modal-content">
+									<!--模态框内容-->
+									<div class="modal-header">
+										<button class="close" data-dismiss="modal"><span>&times;</span></button>
+										<h4 class="modal-title">请选择模板类型</h4>
+									</div>
+									<div class="modal-body clearfix">
+										<div class="col-lg-12" style="margin-bottom: 20px;">
+											<div class="clearfix" style="margin-bottom: 25px;">
+												<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 sx">
+													<input type="text" name="name" id="template" class="form-control" placeholder="模板名称" />
+												</div>
+												<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 sx">
+													<select name="stuType" class="form-control">
+														<option value="">适用学生类型</option>
+														<option value="01">本科</option>
+														<option value="02">硕士</option>
+														<option value="03">博士</option>
+														<option value="04">双学位</option>
+													</select>
+												</div>
+												<div class=" col-lg-2 col-md-2 col-sm-2 col-xs-2 sx">
+													<button id="btn0" class="btn btn-primary form-control">查询</button>
+												</div>
+												<div class=" col-lg-2 col-md-2 col-sm-2 col-xs-2 sx">
+													<button type="button" data-dismiss="modal" class="btn btn-danger pull-right form-control" >取消</button>
+												</div>
+											</div>
+											<div class="table-responsive">
+												<table class="table table-hover table-striped" style="text-align: center;">
+													<thead>
+														<tr class="info">
+															<th class="text-center">模板名称</th>
+															<th class="text-center">适用学生类型</th>
+															<th class="text-center">offer说明</th>
+															<th class="text-center">操作</th>
+														</tr>
+													</thead>
+													<tbody id="tbody0">
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+									<div class="modal-footer">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal fade in" id="tcAlert" tabindex="-1">
+							<!--模态框声明-->
+							<div class="modal-dialog">
+								<!--模态框窗口-->
+								<div class="modal-content">
+									<!--模态框内容-->
+									<div class="modal-header">
+										<button class="close" data-dismiss="modal"><span>&times;</span></button>
+									</div>
+									<div class="modal-body clearfix">
+										<div class="col-lg-12" style="margin-bottom: 20px;">
+											<label id="label" class="col-lg-12"></label>
+										</div>
+									</div>
+									<div class="modal-footer">
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>
+		</section>
+	</body>
+</html>

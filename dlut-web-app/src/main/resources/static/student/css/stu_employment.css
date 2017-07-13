@@ -1,0 +1,39 @@
+.main .row{
+	font-size: 18px;
+	border:1px solid #ddd;
+	border-radius: 10px;
+	margin-top:10px;
+	margin-bottom: 36px;
+	padding: 30px;
+	position: relative;
+	background: #fff;
+}
+input,textarea{
+	background: rgba(0,0,0,0);
+	border: none;
+}
+.row header{
+	position: absolute;
+	top: -14px;
+	left: 0;
+	background: rgba(0,0,0,0);
+}
+.form{
+	position: relative;
+}
+.location{
+	position: absolute;
+	top: -50px;
+	right: 0;
+}
+.form-control[disabled], .form-control[readonly], fieldset[disabled]{
+	background-color: rgba(255,255,255,0);
+	border:none;
+	box-shadow: none;
+}
+.zi{
+	font-size: 14px;
+}
+.pull-left{
+	line-height: 34px;
+}

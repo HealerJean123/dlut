@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html  class="no-js" lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,user-scalable=no"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+		<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+		<title>大连理工大学</title>
+		<link rel="stylesheet" type="text/css" href="../static/portals/css/bootstrap.min.css" th:href="@{/portals/css/bootstrap.min.css}"/>
+		<link rel="stylesheet" type="text/css" href="../static/portals/css/main.css" th:href="@{/portals/css/main.css}"/>
+		<link rel="stylesheet" href="../static/portals/css/zabuto_calendar.min.css" th:href="@{/portals/css/zabuto_calendar.min.css}"/>
+		<script src="../static/portals/js/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8" th:src="@{/portals/js/jquery-1.10.2.min.js}"></script>
+		<script src="../static/portals/js/bootstrap.js" type="text/javascript" charset="utf-8" th:src="@{/portals/js/bootstrap.js}"></script>
+		<script type="text/javascript" src="../static/portals/js/index.js" th:src="@{/portals/js/index.js}"></script>
+		<script src="../static/portals/js/zabuto_calendar.min.js" th:src="@{/portals/js/zabuto_calendar.min.js}"></script>
+		<!--[if lte IE 9]>
+			<script src="../static/js/respond.js" th:src="@{/js/respond.js}"></script>
+			<script src="../static/js/html5shiv.min.js" th:src="@{/js/html5shiv.min.js}"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<!--第一部分导航-->
+		<nav class="navbar navbar-default navbar-fixed-top one">
+			<div class="container">
+				<!--<ul class="nav navbar-nav">
+					<li><a href="#" style="margin-left: 0px;">学生</a></li>
+					<li><a href="#">教师</a></li>
+					<li><a href="#">企业</a></li>
+				</ul>-->
+				<ul class="nav navbar-nav pull-right navbar2">
+					<li><a th:href="@{/login.html}">登录</a></li>
+					<!--<li><a href="#">注册</a></li>-->
+				</ul>
+			</div>
+		</nav>
+		<!--第二部分导航-->
+		<nav class="navbar navbar-default navbar-fixed-top" id="myNav">
+			<div class="container">
+				<ul class="nav navbar-nav li">
+ 					<li class="li"><a th:href="@{/index.html}">首页</a></li>
+ 					<li class="li student">
+ 						<a class="bys" href="#">毕业生</a>
+ 						<!--把这个东西移动到这里-->
+ 						<ul class="graduate"  id="graduate">
+							<li class="pull-left"><a href="#"><span></span>校园招聘</a></li>
+							<li class="pull-left"><a href="#"><span></span>企业名录</a></li>
+							<li class="pull-left"><a href="#"><span></span>咨询辅导</a></li>
+							<li class="pull-left"><a href="#"><span></span>职业测评</a></li>
+							<li class="pull-left"><a href="#"><span></span>业务办理</a></li>
+							<li class="pull-left"><a href="#"><span></span>招聘指南</a></li>
+							<li class="pull-left"><a href="#"><span></span>相关下载</a></li>
+							<li class="pull-left"><a href="#"><span></span>问卷调查</a></li>
+							<li class="pull-left"><a href="#"><span></span>出国留学</a></li>
+							<li class="pull-left"><a href="#"><span></span>政策法规</a></li>
+							<li class="pull-left"><a href="#"><span></span>校园地图</a></li>
+							<li class="pull-left"><a href="#"><span></span>兄弟高校发布</a></li>
+						</ul>
+ 					</li>
+ 					<li class="li"><a th:href="@{/portals/newsMultiList?type=TEACHER}">教师</a></li>
+ 					<li class="li">
+ 						<a href="#" class="logo" style="width: 248px;height: 111px;">
+ 							<img src="../static/portals/img/logo.png" th:src="@{/portals/img/logo.png}"/>
+ 							<span class="span">毕业生就业信息网</span>
+ 						</a>
+ 					</li>
+ 					<li class="li"><a th:href="@{/portals/newsMultiList?type=COMPANY}">招聘企业</a></li>
+ 					<li class="li"><a th:href="@{/portals/newsMultiList?type=SCHOOLFELLOW}">校友</a></li>
+ 				</ul>
+ 				<div style="position: relative;">
+ 					<input type="text" id="searchContent" class="pull-right" placeholder="请输入关键词进行搜索"/>
+					<span class="glyphicon glyphicon-search" id="search" style="position: absolute;right:210px;top: 41px;"></span>
+ 				</div>
+
+ 				<ul class="nav navbar-nav tip">
+ 					<li><a href="#">招聘会</a></li>
+ 					<li><a href="#">团体活动</a></li>
+ 					<li><a href="#">档案</a></li>
+ 					<li><a href="#">学籍</a></li>
+ 					<li><a href="#">学籍</a></li>
+ 				</ul>
+			</div>
+		</nav>
+		<section class="container three">
+			<!--轮播图-->
+			<div id="myCarousel" class="carousel slide">
+				<ol class="carousel-indicators play" >
+					<li data-target="#myCarousel" th:each="news,NewsDTO:${newsListDTO.banner}" th:attr="data-slide-to=${NewsDTO.index}" data-slide-to="0" th:classappend="${NewsDTO.first}?'active'" ></li>
+				</ol>
+				<div class="carousel-inner">
+					<div class="item" th:classappend="${NewsDTO.first}?'active'"  th:each="news,NewsDTO:${newsListDTO.banner}">
+						<a th:href="@{/portals/newspage.html?id=}+${news.id}">
+							<img  th:src="${news.banner}" style="width:1358px; height: 320px;"  alt="图一" />
+						</a>
+					</div>
+				</div>
+			</div>
+			<!--咨询-->
+			<ul class="row">
+				<li class="col-lg-3 col-md-3 col-sm-3 col-xs-3 list">
+					<h3 class="title"><span class="glyphicon glyphicon-list-alt"></span>新闻公告</h3>
+					<ul id="myTab1" class="nav nav-tabs">
+						<li class="active">
+							<a href="#news" data-toggle="tab">新闻</a>
+						</li>
+						<li>
+							<a href="#announcement" data-toggle="tab">公告</a>
+						</li>
+						<li>
+							<a href="#agreement" data-toggle="tab">协议</a>
+						</li>
+					</ul>
+					<ul  class="tab-content">
+						<li class="tab-pane fade in active" id="news">
+							<ul class="uls">
+								<li class="spill" th:each="news,NewsDTO:${newsListDTO.news}"><a th:href="@{/portals/newspage.html?id=}+${news.id}" th:text="${news.title}">1这里鹅鹅鹅鹅鹅鹅鹅鹅鹅鹅鹅鹅鹅鹅鹅鹅鹅鹅鹅鹅鹅都是选项卡对应的内容</a><span class="pull-right" th:text="${news.publishDate}">[2017-03-21]</span></li>
+								<li class="more"><a th:href="@{/portals/newslist.html?newsColumn=01}" class="pull-right">更多<span class="glyphicon glyphicon-circle-arrow-right"></span></a></li>
+							</ul>
+						</li>
+						<li class="tab-pane fade" id="announcement">
+                            <ul class="uls"></ul>
+						</li>
+						<li class="tab-pane fade" id="agreement">
+                            <ul class="uls"></ul>
+						</li>
+					</ul>
+				</li>
+				<li class="col-lg-3 col-md-3 col-sm-3 col-xs-3 list">
+					<h3 class="title"><span class="glyphicon glyphicon-user"></span>就业指导</h3>
+					<ul id="myTab2" class="nav nav-tabs">
+						<li class="active">
+							<a href="#refer" data-toggle="tab">咨询</a>
+						</li>
+						<li>
+							<a href="#chair" data-toggle="tab">讲座</a>
+						</li>
+						<li>
+							<a href="#action" data-toggle="tab">活动</a>
+						</li>
+						<li>
+							<a href="#competition" data-toggle="tab">赛事</a>
+						</li>
+					</ul>
+					<ul  class="tab-content">
+						<li class="tab-pane fade in active" id="refer">
+                            <ul class="uls">
+                                <li class="spill" th:each="news,NewsDTO:${newsListDTO.consultation}"><a th:href="@{/portals/newspage.html?id=}+${news.id}" th:text="${news.title}">1这里都的点点滴滴多多多多多多多多多多多多是选项卡对应的内容</a><span class="pull-right" th:text="${news.publishDate}">[2017-03-21]</span></li>
+                            	<li class="more"><a th:href="@{/portals/newslist.html?newsColumn=04}" class="pull-right">更多<span class="glyphicon glyphicon-circle-arrow-right"></span></a></li>
+                            </ul>
+						</li>
+						<li class="tab-pane fade" id="chair">
+                            <ul class="uls"></ul>
+						</li>
+						<li class="tab-pane fade" id="action">
+                            <ul class="uls"></ul>
+						</li>
+						<li class="tab-pane fade" id="competition">
+                            <ul class="uls"></ul>
+						</li>
+					</ul>
+				</li>
+				<li class="col-lg-3 col-md-3 col-sm-3 col-xs-3 list">
+					<h3 class="title"><span class="glyphicon glyphicon-list-alt"></span>招聘信息</h3>
+					<ul id="myTab3" class="nav nav-tabs">
+						<li class="active">
+							<a href="#special" data-toggle="tab">专场</a>
+						</li>
+						<li>
+							<a href="#desired" data-toggle="tab">需求</a>
+						</li>
+						<li>
+							<a href="#jackaroo" data-toggle="tab">实习</a>
+						</li>
+						<li>
+							<a href="#overseas" data-toggle="tab">海外</a>
+						</li>
+					</ul>
+					<ul  class="tab-content">
+						<li class="tab-pane fade in active" id="special">
+                            <ul class="uls">
+                                <li class="spill"  th:each="news,NewsDTO:${newsListDTO.special}"><a th:href="@{/portals/newspage.html?id=}+${news.id}" th:text="${news.title}">1这里都是选项卡对应的内容</a><span class="pull-right" th:text="${news.publishDate}">[2017-03-21]</span></li>
+                            	<li class="more"><a th:href="@{/portals/newslist.html?newsColumn=08}" class="pull-right">更多<span class="glyphicon glyphicon-circle-arrow-right"></span></a></li>
+                            </ul>
+						</li>
+						<li class="tab-pane fade" id="desired">
+                            <ul class="uls"></ul>
+						</li>
+						<li class="tab-pane fade" id="jackaroo">
+                            <ul class="uls"></ul>
+						</li>
+						<li class="tab-pane fade" id="overseas">
+                            <ul class="uls"></ul>
+						</li>
+					</ul>
+				</li>
+				<li class="col-lg-3 col-md-3 col-sm-3 col-xs-3 list" >
+					<h3 class="title"><span class="glyphicon glyphicon-calendar"></span>招聘会日历</h3>
+					<div id="my-calendar"></div>
+					<section class="shi clearfix">
+						<div class="pull-left"><span id="day">11</span><span id="month">四月</span></div>
+						<ul  class="pull-left conList">
+							<!--<li><a href="#">长安学院招学院学院学恩院聘截止我</a></li>
+							<li><a href="#">长安学院招聘截止</a></li>
+							<li><a href="#">长安学院招学院学院学恩院聘截止我</a></li>
+							<li><a href="#">长安学院招聘截止</a></li>
+							<li><a href="#">长安学院招学院学院学恩院聘截止我</a></li>
+							<li><a href="#">长安学院招聘截止</a></li>-->
+						</ul>
+					</section>
+				</li>
+			</ul>
+		</section>
+		<div class="clearfix"></div>
+		<footer>
+			<div class="container">
+				<div class="foot">
+					<div class="pull-left" style="position: relative;">
+						<span>联系我们：</span>
+						<div class="connection">
+							<a href="#" ><img src="../static/portals/img/weixin.jpg" th:src="@{/portals/img/weixin.jpg}" /></a>
+							<a href="#"><img src="../static/portals/img/weibo.jpg"  th:src="@{/portals/img/weibo.jpg}"/></a>
+							<a href="#"><img src="../static/portals/img/renren.jpg"  th:src="@{/portals/img/renren.jpg}" /></a>
+							<a href="#"><img src="../static/portals/img/phone.jpg"  th:src="@{/portals/img/phone.jpg}" /></a>
+						</div>
+					</div>
+					<div class="pull-right">
+						<label >政府部门就业相关</label>
+						<select  name="pageselect" onchange="self.location.href=options[selectedIndex].value" >
+							<option selected>请选择</option>
+							<option value="http://www.lnjy.com.cn/">辽宁网省高校毕业生就业</option>
+							<option value="http://www.baidu.com">2013中国镇江第五届“双高”人才交流会</option>
+							<option value="http://www.dl-hr.com/home/index.action">大连人力资源市场</option>
+							<option value="http://www.ncss.org.cn/">新职业</option>
+						</select>
+						<label >高校就业信息网</label>
+						<select name="" onchange="self.location.href=options[selectedIndex].value" >
+							<option selected>请选择</option>
+							<option value="http://www.baidu.com">哈工大就业网</option>
+						</select>
+					</div>
+				</div>
+				<ul class="foot2">
+					<li class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<h4>大连理工大学招生就业处</h4>
+						<ul class="contact">
+							<li>电话：<span>+86 0411-84708296</span></li>
+							<li>Email：<span>career@dlut.edu.cn</span></li>
+							<li>传真：<span>+86 0411-84671813</span></li>
+						</ul>
+					</li>
+					<li class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<h4>企事业单位招聘服务</h4>
+						<ul class="contact">
+							<li>就业市场科</li>
+							<li>联系电话：<span>+86 0411-84708533</span></li>
+							<li style="text-indent: 5em;"><span>+86 0411-84706780</span></li>
+							<li>地址：<span>南门科技园C座103室</span></li>
+						</ul>
+					</li>
+					<li class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<h4>业务办理及政策咨询</h4>
+						<ul class="contact">
+							<li>就业信息科</li>
+							<li>联系电话：<span>+86 0411-84708533</span></li>
+							<li style="text-indent: 5em;"><span>+86 0411-84706780</span></li>
+							<li>地址：<span>南门科技园C座103室</span></li>
+						</ul>
+					</li>
+					<li class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<h4>校企合作及指导培训</h4>
+						<ul class="contact">
+							<li>联系电话：<span>+86 0411-84706143 </span></li>
+							<li>地址：<span>南门科技园C座102室</span></li>
+						</ul>
+					</li>
+					<li class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="width: 260px;">
+						<h4>盘锦校区就业指导与校友服务中心</h4>
+						<ul class="contact">
+							<li>电话/传真：<span>+86 0427-2631678</span></li>
+							<li>办公邮箱：<span>pjcareer@dlut.edu.cn</span></li>
+							<li>地址：<span>盘锦校区G01-E207</span></li>
+							<li>网址：<span>http://pjcareer.dlut.edu.cn/</span></li>
+						</ul>
+					</li>
+					<li class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="width: 160px;">
+						<h4>
+							<a href="JavaScript:;"><img src="../static/portals/img/1.jpg" th:src="@{/portals/img/1.jpg}" style="width: 160px;height: 48px; border：1px solid #000"/></a>
+							<a href="JavaScript:;"><img src="../static/portals/img/2.jpg" th:src="@{/portals/img/2.jpg}" style="width: 160px;height: 48px; border：1px solid #000"/></a>
+							<a href="JavaScript:;"><img src="../static/portals/img/3.jpg" th:src="@{/portals/img/3.jpg}" style="width: 160px;height: 48px; border：1px solid #000"/></a>
+						</h4>
+
+					</li>
+					<li class="clearfix"></li>
+				</ul>
+				<div class="foot3">
+					<div class="o">
+						<span>
+							版权所有&copy;2014
+						</span>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="clearfix"></div>
+		</footer>
+	</body>
+</html>

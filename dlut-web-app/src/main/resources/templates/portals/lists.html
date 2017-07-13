@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html  class="no-js" lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,user-scalable=no"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+		<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+		<title>大连理工大学</title>
+		<link rel="stylesheet" type="text/css" href="../../static/portals/css/bootstrap.min.css" th:href="@{/portals/css/bootstrap.min.css}"/>
+		<link rel="stylesheet" type="text/css" href="../../static/portals/css/main.css" th:href="@{/portals/css/main.css}"/>
+		<link rel="stylesheet" type="text/css" href="../../static/css/page.css" th:href="@{/css/page.css}">
+		<link rel="stylesheet" type="text/css" href="../../static/portals/css/main_1.css" th:href="@{/portals/css/main_1.css}"/>
+		<link rel="stylesheet" href="../../static/portals/css/zabuto_calendar.min.css" th:href="@{/portals/css/zabuto_calendar.min.css}"/>
+		<link rel="stylesheet" type="text/css" href="../../static/portals/css/lists.css" th:href="@{/portals/css/lists.css}"/>
+		<script src="../../static/portals/js/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8" th:src="@{/portals/js/jquery-1.10.2.min.js}"></script>
+		<script type="text/javascript" src="../../static/portals/js/zabuto_calendar.min.js" th:src="@{/portals/js/zabuto_calendar.min.js}"></script>
+		<script src="../../static/portals/js/bootstrap.js" type="text/javascript" charset="utf-8" th:src="@{/portals/js/bootstrap.js}"></script>
+		<script type="text/javascript" src="../../static/portals/js/index.js" th:src="@{/portals/js/index.js}"></script>
+		<script type="text/javascript" src="../../static/portals/js/indexSearch.js" th:src="@{/portals/js/indexSearch.js}"></script>
+		<script src="../../static/js/page.js" th:src="@{/js/page.js}"></script>
+		<script src="../static/portals/js/zabuto_calendar.min.js" th:src="@{/portals/js/zabuto_calendar.min.js}"></script>
+		<!--[if lte IE 9]>
+			<script src="../static/js/respond.js" th:src="@{/js/respond.js}"></script>
+			<script src="../static/js/html5shiv.min.js" th:src="@{/js/html5shiv.min.js}"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<!--第一部分导航-->
+		<nav class="navbar navbar-default navbar-fixed-top one">
+			<div class="container">
+				<!--<ul class="nav navbar-nav">
+					<li><a href="#" style="margin-left: 0px;">学生</a></li>
+					<li><a href="#">教师</a></li>
+					<li><a href="#">企业</a></li>
+				</ul>-->
+				<ul class="nav navbar-nav pull-right navbar2">
+					<li><a th:href="@{/login.html}">登录</a></li>
+					<!--<li><a href="#">注册</a></li>-->
+				</ul>
+			</div>
+		</nav>
+		<!--第二部分导航-->
+		<nav class="navbar navbar-default navbar-fixed-top" id="nav">
+			<div class="container">
+				<ul class="nav navbar-nav li">
+ 					<li><a class="a" th:href="@{/index.html}">首页</a></li>
+ 					<li  class="student">
+ 						<a class="a bys" href="JavaScript:;">毕业生</a>
+ 						<ul class="graduate"  id="graduate">
+							<li class="pull-left"><a href="#"><span></span>校园招聘</a></li>
+							<li class="pull-left"><a href="#"><span></span>企业名录</a></li>
+							<li class="pull-left"><a href="#"><span></span>咨询辅导</a></li>
+							<li class="pull-left"><a href="#"><span></span>职业测评</a></li>
+							<li class="pull-left"><a href="#"><span></span>业务办理</a></li>
+							<li class="pull-left"><a href="#"><span></span>招聘指南</a></li>
+							<li class="pull-left"><a href="#"><span></span>相关下载</a></li>
+							<li class="pull-left"><a href="#"><span></span>问卷调查</a></li>
+							<li class="pull-left"><a href="#"><span></span>出国留学</a></li>
+							<li class="pull-left"><a href="#"><span></span>政策法规</a></li>
+							<li class="pull-left"><a href="#"><span></span>校园地图</a></li>
+							<li class="pull-left"><a href="#"><span></span>兄弟高校发布</a></li>
+						</ul>
+ 					</li>
+ 					<li><a class="a" th:href="@{/portals/newsMultiList?type=TEACHER}">教师</a></li>
+ 					<li>
+ 						<a href="#" class="logo" style="width: 248px;height: 60px;">
+ 							<span id="logo">毕业生就业信息网</span>
+ 						</a>
+ 					</li>
+ 					<li><a class="a" th:href="@{/portals/newsMultiList?type=COMPANY}">招聘企业</a></li>
+ 					<li><a class="a" th:href="@{/portals/newsMultiList?type=SCHOOLFELLOW}">校友</a></li>
+ 				</ul>
+				<div style="position: relative;">
+ 					<input type="text" id="searchContent" class="pull-right" placeholder="请输入关键词进行搜索"/>
+					<span class="glyphicon glyphicon-search" id="search" style="position: absolute;right:210px;top: 21px;"></span>
+ 				</div>
+			</div>
+		</nav>
+		<section class="container three">
+			<div class="address">
+			<span>首页></span><span>招聘信息</span>
+			<input type="hidden" name="searchParam" th:value="${searchParam}" />
+			</div>
+			<ul class="matter details clearfix" >
+				<li class="detailsR  pull-left" >
+					<h3 class="title">新闻列表</h3>
+					<ul class="cons" style="padding-left:50px;"></ul>
+					<nav class="pages" aria-label="Page navigation">
+	                    <ul class="page" maxshowpageitem="10" pagelistcount="15"  id="page"></ul>
+	                </nav>
+				</li>
+				<li class="pull-right detailsRr">
+					<h3 class="title"><span class="glyphicon glyphicon-calendar"></span>招聘会日历</h3>
+					<div id="my-calendar"></div>
+					<section class="shi clearfix">
+						<div class="pull-left"><span>11</span><span>四月</span></div>
+						<ul  class="pull-left conList">
+							<li><a href="#">长安学院招聘截止</a></li>
+							<li><a href="#">长安学院招聘截止</a></li>
+						</ul>
+					</section>
+					<!--合作企业-->
+					<div id="wrap">
+						<ul class="list">
+                            <li  th:each="logo,LogoList:${logoList}"><a th:href="@{${logo.url}}">
+                                <img  th:src="${logo.logo}" />
+                            </a></li>
+					    </ul>
+					</div>
+				</li>
+			</ul>
+		</section>
+		<div class="clearfix"></div>
+		<footer>
+			<div class="container">
+				<div class="foot">
+					<div class="pull-left" style="position: relative;">
+						<span>联系我们：</span>
+						<div class="connection">
+							<a href="#" ><img src="../../static/portals/img/weixin.jpg" th:src="@{/portals/img/weixin.jpg}" /></a>
+							<a href="#"><img src="../../static/portals/img/weibo.jpg"  th:src="@{/portals/img/weibo.jpg}"/></a>
+							<a href="#"><img src="../../static/portals/img/renren.jpg"  th:src="@{/portals/img/renren.jpg}" /></a>
+							<a href="#"><img src="../../static/portals/img/phone.jpg"  th:src="@{/portals/img/phone.jpg}" /></a>
+						</div>
+					</div>
+					<div class="pull-right">
+						<label for="">政府部门就业相关</label>
+						<select name="">
+							<option selected>请选择</option>
+						</select>
+						<label for="">高校就业信息网</label>
+						<select name="">
+							<option selected>请选择</option>
+						</select>
+					</div>
+				</div>
+				<ul class="foot2">
+					<li class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<h4>大连理工大学招生就业处</h4>
+						<ul class="contact">
+							<li>电话：<span>+86 0411-84708296</span></li>
+							<li>Email：<span>career@dlut.edu.cn</span></li>
+							<li>传真：<span>+86 0411-84671813</span></li>
+						</ul>
+					</li>
+					<li class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<h4>企事业单位招聘服务</h4>
+						<ul class="contact">
+							<li>就业市场科</li>
+							<li>联系电话：<span>+86 0411-84708533</span></li>
+							<li style="text-indent: 5em;"><span>+86 0411-84706780</span></li>
+							<li>地址：<span>南门科技园C座103室</span></li>
+						</ul>
+					</li>
+					<li class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<h4>业务办理及政策咨询</h4>
+						<ul class="contact">
+							<li>就业信息科</li>
+							<li>联系电话：<span>+86 0411-84708533</span></li>
+							<li style="text-indent: 5em;"><span>+86 0411-84706780</span></li>
+							<li>地址：<span>南门科技园C座103室</span></li>
+						</ul>
+					</li>
+					<li class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<h4>校企合作及指导培训</h4>
+						<ul class="contact">
+							<li>联系电话：<span>+86 0411-84706143 </span></li>
+							<li>地址：<span>南门科技园C座102室</span></li>
+						</ul>
+					</li>
+					<li class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="width: 260px;">
+						<h4>盘锦校区就业指导与校友服务中心</h4>
+						<ul class="contact">
+							<li>电话/传真：<span>+86 0427-2631678</span></li>
+							<li>办公邮箱：<span>pjcareer@dlut.edu.cn</span></li>
+							<li>地址：<span>盘锦校区G01-E207</span></li>
+							<li>网址：<span>http://pjcareer.dlut.edu.cn/</span></li>
+						</ul>
+					</li>
+					<li class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="width: 160px;">
+						<h4>
+							<img src="../../static/portals/img/1.png" th:src="@{/portals/img/1.png}" style="width: 160px;height: 48px; border：1px solid #000"/>
+							<img src="../../static/portals/img/1.png" th:src="@{/portals/img/1.png}" style="width: 160px;height: 48px; border：1px solid #000"/>
+							<img src="../../static/portals/img/1.png" th:src="@{/portals/img/1.png}" style="width: 160px;height: 48px; border：1px solid #000"/>
+						</h4>
+
+					</li>
+					<li class="clearfix"></li>
+				</ul>
+				<div class="foot3">
+					<div class="o">
+						<span>
+							版权所有&copy;2014
+						</span>
+					</div>
+
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</footer>
+	</body>
+</html>

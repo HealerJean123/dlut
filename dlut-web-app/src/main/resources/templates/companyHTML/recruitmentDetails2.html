@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,user-scalable=no" />
+		<meta name="viewport" content="width=device-width,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+		<link rel="stylesheet" href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+		<link rel="stylesheet" type="text/css" href="../../static/company/css/recruitment.css" th:href="@{/company/css/recruitment.css}" />
+		<script type="text/javascript" src="../../static/js/jquery-1.10.2.min.js" th:src="@{/js/jquery-1.10.2.min.js}"></script>
+		<script type="text/javascript" src="../../static/js/bootstrap.js" th:src="@{/js/bootstrap.js}"></script>
+		<script type="text/javascript" src="../../static/js/jedate.js" th:src="@{/js/jedate.js}"></script>
+		<link rel="stylesheet" href="../../static/company/css/index.css" th:href="@{/company/css/index.css}" />
+		<script type="text/javascript" src="../../static/company/js/index.js" th:src="@{/company/js/index.js}"></script>
+		<script type="text/javascript" src="../../static/js/bootstrapValidator.js" th:src="@{/js/bootstrapValidator.js}"></script>
+		<script src="../../static/company/js/recruitment.js" type="text/javascript" th:src="@{/company/js/recruitment.js}"></script>
+		<script src="../../static/js/index.js" type="text/javascript" th:src="@{/js/index.js}"></script>
+		<!--[if lte IE 9]>
+	<script src="../../static/js/respond.js" th:src="@{/js/respond.js}"></script>
+	<script src="../../static/js/html5shiv.min.js" th:src="@{/js/html5shiv.min.js}"></script>
+<![endif]-->
+	</head>
+
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top titleNav">
+			<div class="navbar-header">
+				<a th:href="@{/}" class="btn hidden-xs"><img src="../../static/img/test.png" th:src="@{/img/test.png}" style="width:150px" /></a>
+				<h2 class="btn btn-title ">大连理工大学就业管理与服务平台</h2>
+			</div>
+			<div class=" navbar-collapse  collapse">
+				<ul class="nav navbar-nav navbar-right ">
+					<li>
+						<a th:text="${session.user.depName}" th:data-id="${session.user.id}" id="identity">我是企业</a>
+					</li>
+					<li class="logout">
+						<a><span class="glyphicon glyphicon-off"></span></a>
+					</li>
+					<li>
+						<a></a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<section class="container-fluid con">
+			<div class="row">
+				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="z-index: 999;">
+					<div>
+						<aside class="aside">
+							<ul class="nav nav-pills nav-stacked">
+								<li class="active">
+									<a th:href="@{/company/recruitment.html}"><span class="iconfont icon-shouye"></span>招聘需求</a>
+								</li>
+								<li>
+									<a th:href="@{/}"><span class="iconfont icon-shouye"></span>招聘会预约</a>
+								</li>
+								<li>
+									<a th:href="@{/company/appointmentList.html}"><span class="iconfont icon-shouye"></span>专场招聘预约</a>
+								</li>
+								<li>
+									<a th:href="@{/}"><span class="iconfont icon-shouye"></span>场地租用</a>
+								</li>
+								<li>
+									<a th:href="@{/}"><span class="iconfont icon-shouye"></span>简历管理</a>
+								</li>
+								<li>
+									<a th:href="@{/company/offerHTML}"><span class="iconfont icon-shouye"></span>offer管理</a>
+								</li>
+								<li>
+									<a th:href="@{/company/agreementHtml}"><span class="iconfont icon-shouye"></span>签约管理</a>
+								</li>
+								<li>
+									<a th:href="@{/company/companyInfo?id=}+${session.user.depId}" id="info"><span class="iconfont icon-shouye"></span>单位信息维护</a>
+								</li>
+								<li>
+									<a th:href="@{/company/enrollment.html}"><span class="iconfont icon-shouye"></span>生源查询</a>
+								</li>
+								<li>
+									<a th:href="@{/company/issuingOffer.html}"><span class="iconfont icon-shouye"></span>offer模板管理</a>
+								</li>
+							</ul>
+						</aside>
+					</div>
+				</div>
+				<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+					<div class="main" style="position: relative;">
+						<h3>招聘职位详情</h3>
+						<div class="tab-pane" style="padding-bottom: 50px;">
+							<form action="/app/company/updateJob" class="form-horizontal form1 bgColor" method="post">
+								<input type="hidden" name="auditStatus" th:value="${recJobPosition.auditStatus}"/>
+                                <input type="hidden" name="id" th:value="${recJobPosition.id}" />
+								<!--第二页的内容-->
+								<div class="form-content">
+									<div class="workRow clearfix" style="padding:20px;margin-bottom: 30px;">
+										<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+											<label class="col-lg-4  col-md-4 col-sm-4 col-xs-4  control-label">职位名称</label>
+											<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+												<input type="text" class="form-control only" name="name" id="" th:value="${recJobPosition.name}" />
+											</div>
+										</div>
+										<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+											<label class="col-lg-4  col-md-4 col-sm-4 col-xs-4  control-label">职位描述</label>
+											<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+												<input type="text" class="form-control only" name="description" th:value="${recJobPosition.description}" id="" value="" />
+											</div>
+										</div>
+										<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+											<label class="col-lg-4  col-md-4 col-sm-4 col-xs-4  control-label">职位类型</label>
+											<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+												<select name="type" class="form-control only">
+                                                    <option th:each="positionType, positionTypeS : ${positionType}" th:value="${positionType.key}" th:text="${positionType.value}" th:selected="${recJobPosition.type==positionType.key}"></option>
+												</select>
+											</div>
+										</div>
+										<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+											<label class="col-lg-4  col-md-4 col-sm-4 col-xs-4  control-label">职位类别</label>
+											<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+												<select name="category" class="form-control only">
+                                                    <option th:each="jobType, jobTypeS : ${jobType}" th:value="${jobType.key}" th:text="${jobType.value}" th:selected="${recJobPosition.category==jobType.key}"></option>
+												</select>
+											</div>
+										</div>
+										<div class="div">
+											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+												<label class="col-lg-4  col-md-4 col-sm-4 col-xs-4  control-label">学历要求</label>
+												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+													<select name="degree" class="form-control only">
+                                                        <option th:each="eduDegree, eduDegreeS : ${eduDegree}" th:value="${eduDegree.key}" th:text="${eduDegree.value}" th:selected="${recJobPosition.degree==eduDegree.key}"></option>
+													</select>
+												</div>
+											</div>
+											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+												<label class="col-lg-4  col-md-4 col-sm-4 col-xs-4  control-label">专业要求</label>
+												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+													<input type="text" class="form-control only" name="major" th:value="${recJobPosition.major}" id="" value="" />
+												</div>
+											</div>
+											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+												<label class="col-lg-4  col-md-4 col-sm-4 col-xs-4  control-label">接收简历邮箱</label>
+												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+													<input type="text" name="recEmail" th:value="${recJobPosition.recEmail}"  class="form-control only" />
+												</div>
+											</div>
+											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+												<label class="col-lg-4  col-md-4 col-sm-4 col-xs-4  control-label">接收简历方式</label>
+												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+													<select name="receiveMode" class="form-control only">
+                                                        <option th:each="receiveMode, receiveModeS : ${receiveMode}" th:value="${receiveMode.key}" th:text="${receiveMode.value}" th:selected="${recJobPosition.receiveMode==receiveMode.key}"></option>
+                                                    </select>
+												</div>
+											</div>
+											<div class="clearfix"></div>
+											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+												<label class="col-lg-4  col-md-4 col-sm-4 col-xs-4  control-label">工作城市</label>
+												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+													<input type="text" class="form-control only" name="city" th:value="${recJobPosition.city}" id="" value="" />
+												</div>
+												<!--是否级联-->
+											</div>
+											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+												<label class="col-lg-4  col-md-4 col-sm-4 col-xs-4  control-label">详细地址</label>
+												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+													<input type="text" name="address" th:value="${recJobPosition.address}"  class="form-control only" />
+												</div>
+											</div>
+											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+												<label class="col-lg-4  col-md-4 col-sm-4 col-xs-4  control-label">招聘人数</label>
+												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+													<input type="text" name="recruitmentNum" th:value="${recJobPosition.recruitmentNum}" class="form-control only" />
+												</div>
+											</div>
+											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+												<label class="col-lg-4  col-md-4 col-sm-4 col-xs-4  control-label">薪资待遇</label>
+												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+													<select name="salary" class="form-control only">
+                                                        <option th:each="salary, salaryS : ${salary}" th:value="${salary.key}" th:text="${salary.value}" th:selected="${recJobPosition.salary==salary.key}"></option>
+													</select>
+												</div>
+											</div>
+											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+												<label class="col-lg-4  col-md-4 col-sm-4 col-xs-4  control-label">开始时间</label>
+												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+													<input class="datainp form-control only" id="datebut0" type="text" name="startTime" style="background-color: #fff;"  th:value="${recJobPosition.startTime}" readonly onClick="jeDate({dateCell:'#datebut0',isTime:true,format:'YYYY-MM-DD'})" >
+												</div>
+											</div>
+											<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+												<label class="col-lg-4  col-md-4 col-sm-4 col-xs-4  control-label">结束时间</label>
+												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+													<input class="datainp form-control only" id="datebut1" type="text" name="endTime" th:value="${recJobPosition.endTime}" style="background-color: #fff;" readonly onClick="jeDate({dateCell:'#datebut1',isTime:true,format:'YYYY-MM-DD'})" >
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">校级审核</label>
+												<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+													<input type="text" readonly th:value="${recJobPosition.auditStatusName}" class="form-control only"/>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">校级审核意见</label>
+												<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+													<input type="text" th:value="${recJobPosition.nopassReason}" readonly class="form-control only"/>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-2 col-lg-offset-5 col-md-2 col-md-offset-5 col-sm-2 col-sm-offset-5 col-xs-2 col-xs-offset-5">
+									<button type="submit" class="btn btn-primary btn-block btnNext2">修改</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+		</section>
+		<script type="text/javascript">
+		if($("input[name=auditStatus]").val()!="00"){
+			$(".only").attr("readOnly","true")
+		}
+		jeDate({
+			dateCell:"#indate",//isinitVal:true,
+			format:"YYYY-MM",
+			isTime:false, //isClear:false,
+			minDate:"2015-10-19 ",
+			maxDate:"2016-11-8",
+			okfun:function(val){alert(val)}
+		})
+		</script>
+	</body>
+</html>

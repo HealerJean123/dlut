@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html  class="no-js" lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+    <meta name="viewport" content="width=device-width,user-scalable=no"/>
+    <meta name="viewport" content="width=device-width,user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+<link rel="stylesheet" href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+<link rel="stylesheet" href="../../static/teacher/css/index.css" th:href="@{/teacher/css/index.css}"/>
+<link rel="stylesheet" href="../../static/teacher/css/tea_agreement.css" th:href="@{/teacher/css/tea_agreement.css}" />
+<link rel="stylesheet" type="text/css" href="../../static/css/iconfont.css" th:href="@{/css/iconfont.css}"/>
+<script type="text/javascript" src="../../static/js/jquery-1.10.2.min.js"  th:src="@{/js/jquery-1.10.2.min.js}"></script>
+<script type="text/javascript" src="../../static/js/bootstrap.js"  th:src="@{/js/bootstrap.js}"></script>
+<script src="../../static/teacher/js/show.js" type="text/javascript" th:src="@{/teacher/js/show.js}"></script>
+<script src="../../static/js/index.js" type="text/javascript" th:src="@{/js/index.js}"></script>
+    <!--[if lte IE 9]>
+	<script src="../../static/company/js/respond.js" th:src="@{/company/js/respond.js}"></script>
+	<script src="../../static/company/js/html5shiv.min.js" th:src="@{/company/js/html5shiv.min.js}"></script>
+<![endif]-->
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top titleNav">
+    <div class="navbar-header">
+        <a th:href="@{/}" class="btn hidden-xs"><img src="../../static/img/test.png" th:src="@{/img/test.png}" style="width:150px"/></a>
+        <h2 class="btn btn-title ">大连理工大学就业管理与服务平台</h2>
+    </div>
+    <div class=" navbar-collapse  collapse">
+        <ul class="nav navbar-nav navbar-right ">
+            <li ><a th:text="${session.user.depName}" id="identity" th:data-id="${session.user.id}">我是教师</a></li>
+            <li class="logout"><a><span class="glyphicon glyphicon-off"></span></a></li>
+            <li><a></a></li>
+        </ul>
+    </div>
+
+</nav>
+<section class="container-fluid con">
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="z-index: 999;">
+            <div >
+                <aside class="aside">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><a th:href="@{/}"><span class="iconfont icon-shouye"></span>我的主页</a></li>
+                        <li class="active"><a th:href="@{/teacher/tea_agreementReview.html}"><span class="iconfont icon-qianyuequerenqianyuedianziqianyue"></span>签约审核</a></li>
+                        <li><a th:href="@{/teacher/tea_absentReview.html}"><span class="iconfont icon-weiyue"></span>违约审核</a></li>
+                        <!--<li><a th:href="@{/teacher/teaEmploymentLook.html}"><span class="iconfont icon-"></span>派遣查询</a></li>-->
+                        <li th:if="${(session.user.principal  eq 'SCHOOL') or  (session.user.principal eq 'SCHADMIN')}"><a th:href="@{/teacher/listRessignApplication.html}" ><span class="iconfont icon-paidan"></span>改派查询</a></li>
+                        <li><a th:href="@{/teacher/teaEnrollment.html }"><span class="iconfont icon-xuesheng"></span>生源信息</a></li>
+                        <li><a th:href="@{/teacher/job.html}" ><span class="iconfont icon-quxiang"></span>派遣查询</a></li>
+                        <li><a th:href="@{/teacher/teaBlankBook}" ><span class="iconfont icon-agreement"></span>空白协议书</a></li>
+                        <li><a th:href="@{/teacher/teaDepartStusAudit.html}" ><span class="iconfont icon-xuejiguanli"></span>学籍审核</a></li>
+                        <li><a th:href="@{/teacher/stuInfoFile.html}" ><span class="iconfont icon-xuejiguanli"></span>信息导入</a></li>
+                        <li><a th:href="@{/teacher/teaNews.html}" ><span class="iconfont icon-xuejiguanli"></span>新闻信息</a></li>
+                    	<li><a th:href="@{/teacher/}" ><span class="iconfont icon-xuejiguanli"></span>招聘需求审核</a></li>
+                        <li><a th:href="@{/teacher/tea_venue.html}" ><span class="iconfont icon-xuejiguanli"></span>场地租用审核</a></li>
+                        <li><a th:href="@{/teacher/tea_company.html}" ><span class="iconfont icon-xuejiguanli"></span>企业信息审核</a></li>
+                        <li><a th:href="@{/teacher/logoList}" ><span class="iconfont icon-xuejiguanli"></span>合作企业logo</a></li>
+                        <li th:if="${(session.user.principal  eq 'SCHOOL') or  (session.user.principal eq 'SCHADMIN')}"><a th:href="@{/teacher/listCode.html}" ><span class="iconfont icon-tongyibianma"></span>编码表</a></li>
+                    </ul>
+                </aside>
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+            <div class="main">
+				<h3>签约详情</h3>
+                    <input type="hidden" name="id" th:value="${recOffer.id}"/>
+					<div class="row">
+                    <header><strong>学生基本信息</strong></header>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+                        <div class="pull-left">姓名：</div>
+                        <div class=" pull-left">
+                            <input th:value="${recOffer.realName}" type="text" class="form-control "    readonly  name="realName"  />
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+                        <div class="pull-left" for="">学历：</div>
+                        <div class=" pull-left">
+                            <input id="ceshi" th:value="${#pubcode.codeName('eduDegree',recOffer.eduDegree)}" type="text" class="form-control "    readonly name="eduDegree"/>   <!--111111111111111111-->
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+                        <div class="pull-left" for="">身份证号：</div>
+                        <div class=" pull-left">
+                            <input th:value="${recOffer.idCard}" type="text" class="form-control "    readonly name="idCard"  />
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+                        <div class="pull-left" for="">民族：</div>
+                        <div class=" pull-left">
+                            <input th:value="${#pubcode.codeName('ethnic',recOffer.ethnic)}" type="text" class="form-control "    readonly name="ethnic"  />
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+                        <div class="pull-left" for="">所在院系：</div>
+                        <div class=" pull-left">
+                            <input th:value="${#pubcode.codeName('academy',recOffer.departmentId)}" type="text" class="form-control "    readonly name="departmentId"  />
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+                        <div class="pull-left" for="">专业：</div>
+                        <div class=" pull-left">
+                            <input th:value="${#pubcode.codeName('major',recOffer.majorCode)}" type="text" class="form-control "    readonly name="majorCode"  />
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+                        <div class="pull-left" for="">生源地：</div>
+                        <div class=" pull-left">
+                            <input th:value="${recOffer.homelandName}" type="text"  class="form-control "   readonly name="homelandName"  />
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+                        <div class="pull-left" for="">学号：</div>
+                        <div class=" pull-left">
+                            <input th:value="${recOffer.stuNo}" type="text" class="form-control "    readonly name="stuNo"  />
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+                        <div class="pull-left" for="">毕业时间：</div>
+                        <div class=" pull-left">
+                            <input th:value="${recOffer.startDate}" type="text" class="form-control "    readonly name="startDate"  /><!--111111111111111111-->
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+                        <div class="pull-left" for="">培养方式：</div>
+                        <div class=" pull-left">
+                            <input th:value="${#pubcode.codeName('eduMode',recOffer.eduMode)}" type="text" class="form-control "    readonly name="eduMode"  />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+					<header><strong>就业单位信息</strong></header>
+					<!--<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+						<div class="pull-left" >毕业去向：</div>
+						<div class=" pull-left">
+							<input th:value="${#pubcode.codeName('graduateTo',recOffer.destinationType)}" type="text" class="form-control"   readonly name="destinationType"  />
+						</div>
+					</div>-->
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+						<div class="pull-left" >工作单位名称：</div>
+						<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+							<input th:value="${recOffer.recName}" type="text"  class="form-control"  readonly name="recName"  />
+						</div>
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+						<div class="pull-left" >工作单位所在地：</div>
+						<div class=" col-lg-10 col-md-10 col-sm-10 col-xs-10">
+							<input th:value="${recOffer.recCity}" type="text" class="form-control"   readonly name="recCity"  />
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+						<div class="pull-left" >单位地址：</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input th:value="${recOffer.recAddress}" type="text" class="form-control" name="recAddress"  readonly/>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+						<div class="pull-left" >单位行业： </div>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input th:value="${#pubcode.codeName('industry',recOffer.industry)}" type="text" class="form-control" name="recIndustry"  readonly />
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+						<div class="pull-left" >单位性质：</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input th:value="${#pubcode.codeName('nature',recOffer.nature)}" type="text" class="form-control" name="recNature"  readonly/>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+						<div class="pull-left">组织机构代码：</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input th:value="${recOffer.orgCode}" type="text"   class="form-control" name="recCode"  readonly/>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+						<div class="pull-left" >职位类别：</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input th:value="${#pubcode.codeName('jobType',recOffer.category)}" type="text"   class="form-control" name="jobType" readonly />
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+						<div class="pull-left" >单位联系人：</div>
+						<div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input th:value="${recOffer.recLinker}" type="text"   class="form-control" name="recLinker" readonly />
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+						<div class="pull-left" >联系人手机：</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input th:value="${recOffer.recMobile}" type="text"   class="form-control" name="recMobile"  readonly/>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+						<div class="pull-left" >联系人电话：</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input th:value="${recOffer.recTelphone}" type="text"   class="form-control" name="recTelphone"  readonly/>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<input type="hidden" name="isPfile" th:value="${recOffer.isPfile}"/>
+					<header><strong>档案转寄信息</strong></header>
+					<div class="isHave">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+						<div class="pull-left" >档案转寄单位名称：</div>
+						<div class=" col-lg-10 col-md-10 col-sm-10 col-xs-10">
+							<input th:value="${recOffer.pfileToName}" type="text" class="form-control"  readonly name="pfileToName"  />
+						</div>
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+						<div class="pull-left" >档案转寄地址：</div>
+						<div class=" col-lg-10 col-md-10 col-sm-10 col-xs-10">
+							<input th:value="${recOffer.pfileToAddress}" type="text" name="pfileToAddress" class="form-control"  readonly />
+						</div>
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+						<div class="pull-left" >档案转寄单位所在省市：</div>
+						<div class=" col-lg-8 col-md-8 col-sm-8 col-xs-8">
+							<input th:value="${recOffer.pfileToAddress}" type="text" name="pfileToAddress" class="form-control"  readonly />
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+						<div class="pull-left" >档案接收人：</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input th:value="${recOffer.pfileToRecipient}" type="text" name="pfileToRecipient" class="form-control"  readonly/>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+						<div class="pull-left" >档案接收人电话：</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<input th:value="${recOffer.pfileToPhone}" type="text" name="pfileToPhone" class="form-control"  readonly/>
+						</div>
+					</div>
+					</div>
+					<div class="isNoHave">
+						<h4>*注：不接受档案！！</h4>
+					</div>
+				</div>
+				<div class="row">
+					<header><strong>户口迁移信息</strong></header>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+						<div class="pull-left" >户口是否在学校：</div>
+						<div class=" pull-left">
+                            <span th:if="${recOffer.isSchHuKou eq '1' }" >
+                                    <input type="text" th:value="是" class="form-control"  readonly name="isSchHuKou"/>
+                                    </span>
+                            <span th:if="${recOffer.isSchHuKou eq '0'}" >
+                                    <input type="text" th:value="否" class="form-control"  readonly name="isSchHuKou"/>
+                                    </span>
+                        </div>
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+						<div class="pull-left" >户口迁移地址：</div>
+						<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+							<input th:value="${recOffer.hukouToAddress}" type="text" readonly class="form-control" name="hukouToAddress"  />
+						</div>
+					</div>
+				</div>
+                <div class="row">
+					<header><strong>审核</strong></header>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group">
+						<div class="pull-left" for="">审核状态：</div>
+						<div class=" pull-left col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <input th:value="${#pubcode.codeName('totalAuditStatus',recOffer.auditStatus)}" type="text" class="form-control" readonly />
+                            <input th:value="${recOffer.auditStatus}" type="hidden" class="status"  readonly />
+						</div>
+					</div>
+					<div class="ol-lg-12 col-md-12 col-sm-12 col-xs-12 form-group why0">
+						<div class="pull-left" for="">审核意见：</div>
+						<div class="pull-left col-lg-10 col-md-10 col-sm-10 col-xs-10">
+							<textarea  th:text="${recOffer.noPassReason}" rows="2" readonly style="resize: none;" class="form-control"></textarea>
+						</div>
+					</div>
+				</div>
+				<div style="margin-top:30px">
+					<div class="col-lg-2 col-sm-2 col-md-2 col-xs-2 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
+						<a class="passY btn btn-primary form-control">通过</a>
+					</div>
+					<div class="col-lg-2 col-sm-2 col-md-2 col-xs-2" >
+						<a class="btn btn-danger  form-control" data-toggle="modal" data-target="#myModal">不通过</a>
+					</div>
+				</div>
+				<div class="modal fade " id="myModal" tabindex="-1">  <!--模态框声明-->
+					<div class="modal-dialog"> <!--模态框窗口-->
+						<div class="modal-content"> <!--模态框内容-->
+							<div class="modal-header">
+								<button class="close" data-dismiss="modal"><span>&times;</span></button>
+								<h4 class="modal-title">请输入不通过的原因</h4>
+							</div>
+							<div class="modal-body clearfix">
+									<div class="col-lg-12" style="margin-bottom: 20px;">
+										<textarea name="noPassReason" style="resize: none;" rows="3" class="form-control"></textarea>
+									</div>
+									<a data-dismiss="modal" class="btn btn-default pull-right" >取消</a>
+									<button class="btn btn-primary pull-right noPassY" >确认</button>
+							</div>
+							<div class="modal-footer">
+							</div>
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+<script type="text/javascript">
+if($("[name=isPfile]").val()=="1"){
+	$(".isNoHave").css({"display":"none"})
+}else{
+	$(".isHave").css({"display":"none"})
+}
+
+	if($("[name=noPassReason]").val()){
+		$(".noPassY").prop({"disabled":false})
+	}else{
+		$(".noPassY").prop({"disabled":true})
+	}
+	$("[name=noPassReason]").on("input",function(){
+		if($("[name=noPassReason]").val()){
+		$(".noPassY").prop({"disabled":false})
+	}else{
+		$(".noPassY").prop({"disabled":true})
+	}
+	})
+</script>
+</html>

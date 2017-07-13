@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html  class="no-js" lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+    	.val{
+    		background: rgba(255,255,255,0);
+    		border: none;
+    	}
+    </style>
+    <meta name="viewport" width=device-width,user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" IE=edge Chrome=1" />
+<link rel="stylesheet" href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+<link rel="stylesheet" href="../../static/teacher/css/index.css" th:href="@{/teacher/css/index.css}"/>
+<link rel="stylesheet" href="../../static/teacher/css/tea_information.css" th:href="@{/teacher/css/tea_information.css}"/>
+<link rel="stylesheet" type="text/css" href="../../static/css/iconfont.css" th:href="@{/css/iconfont.css}"/>
+<script type="text/javascript" src="../../static/js/jquery-1.10.2.min.js"  th:src="@{/js/jquery-1.10.2.min.js}"></script>
+<script type="text/javascript" src="../../static/js/bootstrap.js"  th:src="@{/js/bootstrap.js}"></script>
+<script type="text/javascript" src="../../static/student/js/index.js"  th:src="@{/student/js/index.js}"></script>
+<script type="text/javascript" src="../../static/teacher/js/tea_information.js"  th:src="@{/teacher/js/tea_information.js}"></script>
+<script src="../../static/js/index.js" type="text/javascript" th:src="@{/js/index.js}"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<!--[if lte IE 9]>
+	<script src="../../static/js/respond.js" th:src="@{/js/respond.js}"></script>
+	<script src="../../static/js/html5shiv.min.js" th:src="@{/js/html5shiv.min.js}"></script>
+<![endif]-->
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top titleNav">
+    <div class="navbar-header">
+        <a th:href="@{/}" class="btn hidden-xs"><img src="../../static/img/test.png" th:src="@{/img/test.png}" style="width:150px"/></a>
+        <h2 class="btn btn-title ">大连理工大学就业管理与服务平台</h2>
+    </div>
+    <div class=" navbar-collapse  collapse">
+        <ul class="nav navbar-nav navbar-right ">
+            <li ><a th:text="${session.user.depName}" th:data-id="${session.user.id}" id="identity">我是教师</a></li>
+            <li class="logout"><a><span class="glyphicon glyphicon-off"></span></a></li>
+            <li><a></a></li>
+        </ul>
+    </div>
+
+</nav>
+<section class="container-fluid con">
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="z-index: 999;">
+            <div>
+                <aside class="aside">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><a th:href="@{/}"><span class="iconfont icon-shouye"></span>我的主页</a></li>
+                        <li><a th:href="@{/teacher/tea_agreementReview.html}"><span class="iconfont icon-qianyuequerenqianyuedianziqianyue"></span>签约审核</a></li>
+                        <li><a th:href="@{/teacher/tea_absentReview.html}"><span class="iconfont icon-weiyue"></span>违约审核</a></li>
+                        <!--<li><a th:href="@{/teacher/teaEmploymentLook.html}"><span class="iconfont icon-"></span>派遣查询</a></li>-->
+                        <li th:if="${(session.user.principal  eq 'SCHOOL') or  (session.user.principal eq 'SCHADMIN')}"><a th:href="@{/teacher/listRessignApplication.html}" ><span class="iconfont icon-paidan"></span>改派查询</a></li>
+                        <li class="active"><a th:href="@{/teacher/teaEnrollment.html }"><span class="iconfont icon-xuesheng"></span>生源信息</a></li>
+                        <li><a th:href="@{/teacher/job.html}" ><span class="iconfont icon-quxiang"></span>派遣查询</a></li>
+                        <li><a th:href="@{/teacher/teaBlankBook}" ><span class="iconfont icon-agreement"></span>空白协议书</a></li>
+                        <li><a th:href="@{/teacher/teaDepartStusAudit.html}" ><span class="iconfont icon-xuejiguanli"></span>学籍审核</a></li>
+                        <li><a th:href="@{/teacher/stuInfoFile.html}" ><span class="iconfont icon-xuejiguanli"></span>信息导入</a></li>
+                        <li><a th:href="@{/teacher/teaNews.html}" ><span class="iconfont icon-xuejiguanli"></span>新闻信息</a></li>
+                        <li><a th:href="@{/teacher/}" ><span class="iconfont icon-xuejiguanli"></span>招聘需求审核</a></li>
+                        <li><a th:href="@{/teacher/tea_venue.html}" ><span class="iconfont icon-xuejiguanli"></span>场地租用审核</a></li>
+                        <li><a th:href="@{/teacher/tea_company.html}" ><span class="iconfont icon-xuejiguanli"></span>企业信息审核</a></li>
+                        <li><a th:href="@{/teacher/logoList}" ><span class="iconfont icon-xuejiguanli"></span>合作企业logo</a></li>
+                       <li th:if="${(session.user.principal  eq 'SCHOOL') or  (session.user.principal eq 'SCHADMIN')}"><a th:href="@{/teacher/listCode.html}" ><span class="iconfont icon-tongyibianma"></span>编码表</a></li>
+                    </ul>
+                </aside>
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+            <div class="main" style="padding-right:4% ;">
+				<h3>学生详细信息</h3>
+				<form action="/app/teacher/teaUpdateStuInfo" method="post" class="bgColor  form-horizontal" style="padding: 25px 0 25px 60px;">
+                    <div class="row ">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+                            <div class="pull-left"> 姓名:</div>
+                            <div class="show1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+                                    <div class="val"></div>
+                                </div>
+                            </div>
+                            <div class="show2">
+                                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 content">
+                                    <input type="text" class="form-control"  th:value="${studentInfo.name}" name="name"  />
+                                    <input type="hidden" th:value="${studentInfo.id}" name="id" id="id"/>
+                                    <input type="hidden" th:value="${principal}"  id="principal"/>
+                                    <input type="hidden" th:value="${studentInfo.status}"   id="schStatus"/>
+                                    <input type="hidden" th:value="${studentInfo.haveReport}"   id="haveReportStatus"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 edit">
+                                    <button class="btn-link change" style="padding:0;">修改</button>
+                                    <a class="btn-link cancel" style="padding:0;">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+                            <div class="pull-left"> 性别:</div>
+                            <div class="show1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+                                     <div th:text="${#pubcode.codeName('gender',studentInfo.gender)}" >女</div>
+                                </div>
+                            </div>
+                            <div class="show2">
+                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 content">
+                                    <select name="gender" id = "gender" class="form-control">
+                                        <option th:each="gender, genderS : ${allGender}" th:value="${gender.key}" th:text="${gender.value}" th:selected="${studentInfo.gender==gender.key}">[[${gender.value}}]]</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 edit">
+                                    <button class="btn-link change" style="padding:0;">修改</button>
+                                    <a class="btn-link cancel" style="padding:0;">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+                            <div class="pull-left"> 学历:</div>
+                            <div class="show1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+                                    <div th:text="${#pubcode.codeName('eduDegree',studentInfo.eduDegree)}"></div>
+                                </div>
+                            </div>
+                            <div class="show2">
+                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 content">
+                                    <select id = "eduDegree" name="eduDegree"class="form-control">
+                                        <option th:each="eduDegree, eduDegreeS : ${allEduDegree}" th:value="${eduDegree.key}" th:text="${eduDegree.value}" th:selected="${studentInfo.eduDegree == eduDegree.key} ">[[${eduDegree.value}]]</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 edit">
+                                    <button class="btn-link change" style="padding:0;">修改</button>
+                                    <a class="btn-link cancel" style="padding:0;">取消</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+                            <div class="pull-left"> 身份证号:</div>
+                            <div class="show1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+                                    <div class="val"></div>
+                                </div>
+                            </div>
+                            <div class="show2">
+                                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 content">
+                                    <input type="text" th:value="${studentInfo.idCard}"  name="idCard"  class="form-control"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 edit">
+                                    <button class="btn-link change" style="padding:0;">修改</button>
+                                    <a class="btn-link cancel" style="padding:0;">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+                            <div class="pull-left">学号:</div>
+                            <div class="show1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+                                    <div class="val"></div>
+                                </div>
+                            </div>
+                            <div class="show2">
+                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 content">
+                                    <input type="text"  th:value="${studentInfo.stuNo}" name="stuNo"  class="form-control"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 edit">
+                                    <button class="btn-link change" style="padding:0;">修改</button>
+                                    <a class="btn-link cancel" style="padding:0;">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+                            <div class="pull-left">出生日期:</div>
+                            <div class="show1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+                                    <div class="val"></div>
+                                </div>
+                            </div>
+                            <div class="show2">
+                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 content">
+                                    <input type="text" th:value="${studentInfo.birthdate}" name="birthdate"  class="form-control"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 edit">
+                                    <button class="btn-link change" style="padding:0;">修改</button>
+                                    <a class="btn-link cancel" style="padding:0;">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+                            <div class="pull-left">政治面貌:</div>
+                            <div class="show1">
+                                    <div  class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;" th:text="${#pubcode.codeName('political',studentInfo.political)}"></div>
+                            </div>
+                            <div class="show2">
+                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 content">
+                                    <select id = "political" name="political"class="form-control">
+                                        <option th:each="political, politicalS : ${allPolitical}" th:value="${political.key}" th:text="${political.value}" th:selected="${studentInfo.political == political.key} ">[[${political.value}]]</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 edit">
+                                    <button class="btn-link change" style="padding:0;">修改</button>
+                                    <a class="btn-link cancel" style="padding:0;">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+                            <div class="pull-left">民族:</div>
+                            <div class="show1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+                                    <div  th:text="${#pubcode.codeName('ethnic',studentInfo.ethnic)}"></div>
+                                </div>
+                            </div>
+                            <div class="show2">
+                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 content">
+                                    <select id = "ethnic" name="ethnic"class="form-control">
+                                        <option th:each="ethnic, ethnicS : ${allEthnics}" th:value="${ethnic.key}" th:text="${ethnic.value}" th:selected="${studentInfo.ethnic == ethnic.key} ">[[${ethnic.value}]]</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 edit">
+                                    <button class="btn-link change" style="padding:0;">修改</button>
+                                    <a class="btn-link cancel" style="padding:0;">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+                            <div class="pull-left">生源地:</div>
+                            <div class="show1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+                                    <div th:text="${studentInfo.homelandName}"></div>
+                                </div>
+                            </div>
+                            <div class="show2">
+                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 content">
+                                     <select id="homelandName" name="homelandCode"  class="form-control"></select>
+                                 </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 edit">
+                                    <button class="btn-link change" style="padding:0;" id="xg">修改</button>
+                                    <a class="btn-link cancel" style="padding:0;">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+                            <div class="pull-left">所在院系:</div>
+                            <div class="show1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+                                    <div th:text="${#pubcode.codeName('academy',studentInfo.departmentId)}"></div>
+                                </div>
+                            </div>
+                            <div class="show2">
+                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 content">
+                                    <select id = "departmentId" name="departmentId"class="form-control">
+                                        <option th:each="departmentId, departmentIdS : ${allAcademy}" th:value="${departmentId.key}" th:text="${departmentId.value}" th:selected="${studentInfo.departmentId == departmentId.key} ">[[${departmentId.value}]]</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 edit">
+                                    <button class="btn-link change" style="padding:0;">修改</button>
+                                    <a class="btn-link cancel" style="padding:0;">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+                            <div class="pull-left">专业:</div>
+                            <div class="show1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+                                    <div  th:text="${#pubcode.codeName('major',studentInfo.majorCode)}"></div>
+                                </div>
+                            </div>
+                            <div class="show2">
+                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 content">
+                                    <select id = "majorCode" name="majorCode"class="form-control">
+                                        <option th:each="majorCode, majorCodeS : ${allMajor}" th:value="${majorCode.key}" th:text="${majorCode.value}" th:selected="${studentInfo.majorCode == majorCode.key} ">[[${majorCode.value}]]</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 edit">
+                                    <button class="btn-link change" style="padding:0;">修改</button>
+                                    <a class="btn-link cancel" style="padding:0;">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+                            <div class="pull-left">导师:</div>
+                            <div class="show1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+                                    <div class="val"></div>
+                                </div>
+                            </div>
+                            <div class="show2">
+                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 content">
+                                    <input type="text" th:value="${studentInfo.tutorName}" name="tutorName"  class="form-control"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 edit">
+                                    <button class="btn-link change" style="padding:0;">修改</button>
+                                    <a class="btn-link cancel" style="padding:0;">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+                            <div class="pull-left">就读时间:</div>
+                            <div class="show1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+                                    <div class="val"></div>
+                                </div>
+                            </div>
+                            <div class="show2">
+                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 content">
+                                    <input type="text" th:value="${studentInfo.startDate}"  name="startDate"  class="form-control"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 edit">
+                                    <button class="btn-link change" style="padding:0;">修改</button>
+                                    <a class="btn-link cancel" style="padding:0;">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+                            <div class="pull-left">学制:</div>
+                            <div class="show1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+                                    <div  th:text="${#pubcode.codeName('eduYear',studentInfo.eduYear)}"></div>
+                                </div>
+                            </div>
+                            <div class="show2">
+                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 content">
+                                    <select id = "eduYear" name="eduYear"class="form-control">
+                                        <option th:each="eduYear, eduYearS : ${allEduYear}" th:value="${eduYear.key}" th:text="${eduYear.value}" th:selected="${studentInfo.eduYear == eduYear.key} ">[[${eduYear.value}]]</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 edit">
+                                    <button class="btn-link change" style="padding:0;">修改</button>
+                                    <a class="btn-link cancel" style="padding:0;">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+                            <div class="pull-left">所在班级:</div>
+                            <div class="show1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+                                    <div class="val"></div>
+                                </div>
+                            </div>
+                            <div class="show2">
+                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 content">
+                                    <input type="text" th:value="${studentInfo.className}" name="className"  class="form-control"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 edit">
+                                    <button class="btn-link change" style="padding:0;">修改</button>
+                                    <a class="btn-link cancel" style="padding:0;">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+                            <div class="pull-left">语种1:</div>
+                            <div class="show1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+                                    <div th:text="${#pubcode.codeName('language',studentInfo.flangType)}"></div>
+                                </div>
+                            </div>
+                            <div class="show2">
+                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 content">
+                                    <select id = "flangType" name="flangType"class="form-control">
+                                        <option th:each="flangType, flangTypeS : ${allLanguage}" th:value="${flangType.key}" th:text="${flangType.value}" th:selected="${studentInfo.flangType == flangType.key} ">[[${flangType.value}]]</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 edit">
+                                    <button class="btn-link change" style="padding:0;">修改</button>
+                                    <a class="btn-link cancel" style="padding:0;">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+                            <div class="pull-left">语种2:</div>
+                            <div class="show1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+                                    <div  th:text="${#pubcode.codeName('language',studentInfo.flangType2)}"></div>
+                                </div>
+                            </div>
+                            <div class="show2">
+                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 content">
+                                    <select id = "flangType2" name="flangType2"class="form-control">
+                                        <option th:each="flangType2, flangType2S : ${allLanguage}" th:value="${flangType2.key}" th:text="${flangType2.value}" th:selected="${studentInfo.flangType2 == flangType2.key} ">[[${flangType2.value}]]</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 edit">
+                                    <button class="btn-link change" style="padding:0;">修改</button>
+                                    <a class="btn-link cancel" style="padding:0;">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+                            <div class="pull-left">辅导员:</div>
+                            <div class="show1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+                                    <div class="val"></div>
+                                </div>
+                            </div>
+                            <div class="show2">
+                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 content">
+                                    <input type="text" th:value="${studentInfo.counselor}" name="counselor"  class="form-control"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 edit">
+                                    <button class="btn-link change" style="padding:0;">修改</button>
+                                    <a class="btn-link cancel" style="padding:0;">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+                            <div class="pull-left">培养方式:</div>
+                            <div class="show1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+                                    <div  th:text="${#pubcode.codeName('eduMode',studentInfo.eduMode)}"></div>
+                                </div>
+                            </div>
+                            <div class="show2">
+                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 content">
+                                    <select id = "eduMode" name="eduMode"class="form-control">
+                                        <option th:each="eduMode, eduModeS : ${allEduMode}" th:value="${eduMode.key}" th:text="${eduMode.value}" th:selected="${studentInfo.eduMode == eduMode.key} ">[[${eduMode.value}]]</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 edit">
+                                    <button class="btn-link change" style="padding:0;">修改</button>
+                                    <a class="btn-link cancel" style="padding:0;">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+                            <div class="pull-left">定向或委培单位:</div>
+                            <div class="show1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+                                    <div class="val"></div>
+                                </div>
+                            </div>
+                            <div class="show2">
+                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 content">
+                                    <input type="text" th:value="${studentInfo.trustee}"  name="trustee"  class="form-control"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 edit">
+                                    <button class="btn-link change" style="padding:0;">修改</button>
+                                    <a class="btn-link cancel" style="padding:0;">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+                            <div class="pull-left">户口是否转入学校:</div>
+                            <div class="show1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+                                     <span th:if="${studentInfo.haveEduHukou eq '0'}" >
+                                        <input type="text" th:value="否" style="background: rgba(255,255,255,0); border: none;"/>
+                                    </span>
+                                    <span th:if="${studentInfo.haveEduHukou eq '1' }" >
+                                        <input type="text" th:value="是"  style="background: rgba(255,255,255,0); border: none;"/>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="show2">
+                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 content">
+                                    <select id = "haveEduHukou" name="haveEduHukou" class="form-control">
+                                        <option value="0" th:selected="${studentInfo.haveEduHukou=='0'}">否</option>
+                                        <option value="1" th:selected="${studentInfo.haveEduHukou=='1'}">是</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 edit">
+                                    <button class="btn-link change" style="padding:0;">修改</button>
+                                    <a class="btn-link cancel" style="padding:0;">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix" style="border-top:1px solid #D2D2D2;margin-bottom: 10px;"></div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+                            <div class="pull-left">电子邮箱:</div>
+                            <div class="show1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+                                    <div class="val"></div>
+                                </div>
+
+                            </div>
+                            <div class="show2">
+                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 content">
+                                    <input type="text" th:value="${studentInfo.email}"  name="email"  class="form-control"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 edit">
+                                    <button class="btn-link change" style="padding:0;">修改</button>
+                                    <a class="btn-link cancel" style="padding:0;">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+                            <div class="pull-left">手机号码:</div>
+                            <div class="show1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+                                    <div class="val"></div>
+                                </div>
+
+                            </div>
+                            <div class="show2">
+                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 content">
+                                    <input type="text" th:value="${studentInfo.mobilephone}" name="mobilephone"  class="form-control"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 edit">
+                                    <button class="btn-link change" style="padding:0;">修改</button>
+                                    <a class="btn-link cancel" style="padding:0;">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+                            <div class="pull-left">家庭电话:</div>
+                            <div class="show1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+                                    <div class="val"></div>
+                                </div>
+
+                            </div>
+                            <div class="show2">
+                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 content">
+                                    <input type="text" th:value="${studentInfo.homePhone}" name="homePhone"  class="form-control"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 edit">
+                                    <button class="btn-link change" style="padding:0;">修改</button>
+                                    <a class="btn-link cancel" style="padding:0;">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+                            <div class="pull-left">qq号:</div>
+                            <div class="show1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+                                    <div class="val"></div>
+                                </div>
+
+                            </div>
+                            <div class="show2">
+                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 content">
+                                    <input type="text" th:value="${studentInfo.qqNo}"  name="qqNo"  class="form-control"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 edit">
+                                    <button class="btn-link change" style="padding:0;">修改</button>
+                                    <a class="btn-link cancel" style="padding:0;">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 message">
+                            <div class="pull-left">微信号:</div>
+                            <div class="show1">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 content" style="padding: 0;">
+                                    <div class="val"></div>
+                                </div>
+
+                            </div>
+                            <div class="show2">
+                                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 content">
+                                    <input type="text" th:value="${studentInfo.wechatNo}" name="wechatNo"  class="form-control"/>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 edit">
+                                    <button class="btn-link change" style="padding:0;">修改</button>
+                                    <a class="btn-link cancel" style="padding:0;">取消</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="pull-left">教师审核状态</div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" >
+                            <input type="text" readonly th:value="${#pubcode.codeName('auditStatus',studentInfo.status)}" name="status" style="background: rgba(255,255,255,0); border: none;"/>
+                        </div>
+                        <div class="pull-left">是否已上报</div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" >
+                           <span th:if="${studentInfo.haveReport eq '1' }" >
+                                    <input type="text" th:value="是" name="haveReport" readonly style="background: rgba(255,255,255,0); border: none;"/>
+                                    </span>
+                            <span th:if="${studentInfo.haveReport eq '0'}" >
+                                    <input type="text" th:value="否" name="haveReport" readonly style="background: rgba(255,255,255,0); border: none;"/>
+                             </span>
+                        </div>
+                    </div>
+
+				</form>
+				 <div class="row" style="padding-bottom: 60px;margin-top: 20px;">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4 confirm" >
+                            <a class="btn btn-primary form-control" id="auditPass">审核通过</a>
+                        </div>
+						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 confirm" >
+                           <a class="btn btn-default form-control false" id="auditNoPass">审核不通过</a>
+                       </div>
+                    </div>
+                    <div class="modal fade " id="myModal" tabindex="-1">  <!--模态框声明-->
+								<div class="modal-dialog"> <!--模态框窗口-->
+									<div class="modal-content"> <!--模态框内容-->
+										<div class="modal-header">
+											<button class="close" data-dismiss="modal"><span>&times;</span></button>
+										</div>
+										<div class="modal-body clearfix">
+
+												<div class="col-lg-12" style="margin-bottom: 20px;">
+													<h3>审核通过之后，只能对联系信息进行修改哦！你是否要确认</h3>
+												</div>
+												<a data-dismiss="modal" class="btn btn-default pull-right" >取消</a>
+												<button class="btn btn-primary pull-right ok" >确认</button>
+										</div>
+										<div class="modal-footer">
+										</div>
+									</div>
+								</div>
+							</div>
+            	<div class="modal fade " id="tc" tabindex="-1">  <!--模态框声明-->
+			<div class="modal-dialog"> <!--模态框窗口-->
+				<div class="modal-content"> <!--模态框内容-->
+					<div class="modal-header">
+						<button class="close" data-dismiss="modal"><span>&times;</span></button>
+					</div>
+					<div class="modal-body clearfix">
+						<form action="/app/student/updatePwd" method="post" class="form-horizontal">
+							<div class="col-lg-12" style="margin-bottom: 20px;">
+								<label id="label" class="col-lg-12"></label>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+					</div>
+				</div>
+			</div>
+		</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script th:inline="JavaScript">
+    /**
+     只能修改本院系的学生，否则将会报下面的的弹出框
+     您只能修改本院系的学生学籍
+     */
+    var errorMsg = [[${errorMsg}]];
+    if (errorMsg!=null) {
+        alert(errorMsg);
+    }
+</script>
+</body>
+</html>

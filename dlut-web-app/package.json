@@ -1,0 +1,56 @@
+{
+  "name": "dlut-web-app",
+  "version": "2.0.0",
+  "description": "大连理工大学就业网内容管理后台。",
+  "author": "minixiao",
+  "private": true,
+  "cacheDirectories": [
+    "node_modules",
+    "bower_components"
+  ],
+  "scripts": {
+      "test": "cross-env NODE_ENV=development webpack-dev-server",
+      "dev": "cross-env NODE_ENV=development webpack  --progress",
+      "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+      "eslint": "eslint --ext .js,.vue src/main/webapp"
+  },
+  "dependencies": {
+      "dotenv": "^2.0.0",
+      "element-ui": "^1.2.3",
+      "vue": "^2.1.8",
+      "vue-resource": "^1.0.3",
+      "vue-router": "^2.1.1",
+      "vuex": "^2.1.1"
+  },
+  "devDependencies": {
+      "babel-cli": "^6.18.0",
+      "babel-core": "^6.21.0",
+      "babel-eslint": "^7.1.1",
+      "babel-loader": "^6.2.10",
+      "babel-plugin-transform-runtime": "^6.15.0",
+      "babel-preset-env": "^1.1.4",
+      "babel-preset-latest": "^6.16.0",
+      "cross-env": "^3.1.4",
+      "css-loader": "^0.26.1",
+      "eslint": "^3.13.1",
+      "eslint-friendly-formatter": "^2.0.7",
+      "eslint-loader": "^1.6.1",
+      "eslint-plugin-html": "^1.7.0",
+      "file-loader": "^0.9.0",
+      "html-webpack-plugin": "^2.26.0",
+      "less": "^2.7.1",
+      "less-loader": "^2.2.3",
+      "style-loader": "^0.13.1",
+      "url-loader": "^0.5.7",
+      "vue-html-loader": "^1.2.3",
+      "vue-loader": "^10.0.2",
+      "vue-style-loader": "^1.0.0",
+      "vue-template-compiler": "^2.1.8",
+      "webpack": "^2.2.1",
+      "webpack-dev-server": "^2.2.1"
+  },
+  "engines": {
+    "node": ">= 6.9.4",
+    "npm": ">= 4.0.5"
+  }
+}

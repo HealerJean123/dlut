@@ -1,0 +1,12 @@
+$(function(){
+	if($(".yStatus").val()=="审核不通过"){
+		$(".yReason").css({"display":"block"})
+	}else{
+		$(".yReason").css({"display":"none"})
+	}
+	if($(".xStatus").val()=="审核不通过"){
+		$(".xReason").css({"display":"block"})
+	}else{
+		$(".xReason").css({"display":"none"})
+	}
+})

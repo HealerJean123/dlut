@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html  class="no-js" lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style type="text/css">
+	#div .active{
+		background: #005294;
+		color: #fff;
+	}
+</style>
+<meta name="viewport" content="width=device-width,user-scalable=no"/>
+<meta name="viewport" content="width=device-width,user-scalable=no"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+<link rel="stylesheet" href="../../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+<link rel="stylesheet" href="../../static/teacher/css/index.css" th:href="@{/teacher/css/index.css}"/>
+<link rel="stylesheet" type="text/css" href="../../static/css/page.css" th:href="@{/css/page.css}">
+<link rel="stylesheet" type="text/css" href="../../static/css/iconfont.css" th:href="@{/css/iconfont.css}"/>
+<script type="text/javascript" src="../../static/js/jquery-1.10.2.min.js"  th:src="@{/js/jquery-1.10.2.min.js}"></script>
+<script type="text/javascript" src="../../static/js/bootstrap.js"  th:src="@{/js/bootstrap.js}"></script>
+<script src="../../static/js/mypages-1.0.js" th:src="@{/js/mypages-1.0.js}"></script>
+<script src="../../static/js/page.js" th:src="@{/js/page.js}"></script>
+<script type="text/javascript" src="../../static/teacher/js/tea_agreementReviewPage.js" th:src="@{/teacher/js/tea_agreementReviewPage.js}"></script>
+<script src="../../static/js/index.js" type="text/javascript" th:src="@{/js/index.js}"></script>
+    <!--[if lte IE 9]>
+	<script src="../../static/company/js/respond.js" th:src="@{/company/js/respond.js}"></script>
+	<script src="../../static/company/js/html5shiv.min.js" th:src="@{/company/js/html5shiv.min.js}"></script>
+<![endif]-->
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top titleNav">
+    <div class="navbar-header">
+        <a th:href="@{/}" class="btn hidden-xs"><img src="../../static/img/test.png" th:src="@{/img/test.png}" style="width:150px"/></a>
+        <h2 class="btn btn-title ">大连理工大学就业管理与服务平台</h2>
+    </div>
+    <div class=" navbar-collapse  collapse">
+        <ul class="nav navbar-nav navbar-right ">
+            <li ><a th:text="${session.user.depName}" th:data-id="${session.user.id}" id="identity">我是教师</a></li>
+            <li class="logout"><a><span class="glyphicon glyphicon-off"></span></a></li>
+            <li><a></a></li>
+        </ul>
+    </div>
+
+</nav>
+<section class="container-fluid con">
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="z-index: 999;">
+            <div>
+                <aside class="aside">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><a th:href="@{/}"><span class="iconfont icon-shouye"></span>我的主页</a></li>
+                        <li class="active"><a th:href="@{/teacher/tea_agreementReview.html}"><span class="iconfont icon-qianyuequerenqianyuedianziqianyue"></span>签约审核</a></li>
+                        <li><a th:href="@{/teacher/tea_absentReview.html}"><span class="iconfont icon-weiyue"></span>违约审核</a></li>
+                        <!--<li><a th:href="@{/teacher/teaEmploymentLook.html}"><span class="iconfont icon-"></span>派遣查询</a></li>-->
+                        <li th:if="${(session.user.principal  eq 'SCHOOL') or  (session.user.principal eq 'SCHADMIN')}"><a th:href="@{/teacher/listRessignApplication.html}" ><span class="iconfont icon-paidan"></span>改派查询</a></li>
+                        <li><a th:href="@{/teacher/teaEnrollment.html }"><span class="iconfont icon-xuesheng"></span>生源信息</a></li>
+                        <li><a th:href="@{/teacher/job.html}" ><span class="iconfont icon-quxiang"></span>派遣查询</a></li>
+                        <li><a th:href="@{/teacher/teaBlankBook}" ><span class="iconfont icon-agreement"></span>空白协议书</a></li>
+                        <li><a th:href="@{/teacher/teaDepartStusAudit.html}" ><span class="iconfont icon-xuejiguanli"></span>学籍审核</a></li>
+                        <li><a th:href="@{/teacher/stuInfoFile.html}" ><span class="iconfont icon-xuejiguanli"></span>信息导入</a></li>
+                        <li><a th:href="@{/teacher/teaNews.html}" ><span class="iconfont icon-xuejiguanli"></span>新闻信息</a></li>
+                        <li><a th:href="@{/teacher/}" ><span class="iconfont icon-xuejiguanli"></span>招聘需求审核</a></li>
+                        <li><a th:href="@{/teacher/tea_venue.html}" ><span class="iconfont icon-xuejiguanli"></span>场地租用审核</a></li>
+                        <li><a th:href="@{/teacher/tea_company.html}" ><span class="iconfont icon-xuejiguanli"></span>企业信息审核</a></li>
+                        <li><a th:href="@{/teacher/logoList}" ><span class="iconfont icon-xuejiguanli"></span>合作企业logo</a></li>
+                        <li th:if="${(session.user.principal  eq 'SCHOOL') or  (session.user.principal eq 'SCHADMIN')}"><a th:href="@{/teacher/listCode.html}" ><span class="iconfont icon-tongyibianma"></span>编码表</a></li>    
+                    </ul>
+                </aside>
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+            <div class="main">
+				<h3>签约审核</h3><input type="hidden" class="dep" th:value="${session.user.depId}" />
+				<div class="bgColor">
+	    			<div class="clearfix" style="margin-bottom: 25px;">
+		    			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 sx">
+		    				<input type="text" name="stuNo" class="form-control" placeholder="学号"/>
+		    			</div>
+		    			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 sx">
+		    				<input type="text" name="realName" class="form-control" placeholder="姓名"/>
+		    			</div>
+		    			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 sx department">
+	                        <select name="department" class="form-control">
+	                            <option value="" selected>院系</option>
+	                            <option th:each="academy, academyS : ${academy}" th:value="${academy.key}" th:text="${academy.value}">民族</option>
+	                        </select>
+		    			</div>
+		    			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 sx">
+	                        <select name="eduDegree" class="form-control">
+	                            <option value="" selected>学历</option>
+	                            <option th:each="eduDegree, eduDegreeS : ${eduDegree}" th:value="${eduDegree.key}" th:text="${eduDegree.value}">民族</option>
+	                        </select>
+		    			</div>
+		    			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 sx">
+		    				 <select name="endDate" class="form-control">
+	                            <option value="" selected>毕业时间</option>
+	                            <option>2017</option>
+	                            <option>2016</option>
+	                            <option>2015</option>
+	                        </select>
+		    			</div>
+		    			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 sx">
+	                        <select name="stuReceivingStatus" class="form-control">
+	                            <option value="" selected>状态</option>
+	                            <option th:each="offerStatus, offerStatusS : ${offerStatus}" th:value="${offerStatus.key}" th:text="${offerStatus.value}">民族</option>
+	                        </select>
+		    			</div>
+		    			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 sx">
+	                        <select name="majorCode" class="form-control">
+	                            <option value="" selected>专业</option>
+	                            <option th:each="major, majorS : ${major}" th:value="${major.key}" th:text="${major.value}">民族</option>
+	                        </select>
+		    			</div>
+		    			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 sx">
+		    				<input type="text" name="recName" class="form-control" placeholder="签约单位"/>
+		    			</div>
+		    			<div class="clearfix" style="padding:20px"></div>
+		    			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-4 col-md-offset-2 col-sm-offset-4 col-xs-offset-4">
+		    				<button id="btn" class="btn btn-primary form-control">查询</button>
+		    			</div>
+		    			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 ">
+		    				<a class="btn btn-success form-control" id="batch">批量通过</a>
+		    			</div>
+		    		</div>
+					<div class="table-responsive">
+						 <p>*注：“审核不通过”操作请在详情中进行</p>
+						<table class="table table-hover table-striped" style="text-align: center;">
+							<thead>
+								<tr class="info">
+									<th class="text-center">全选<input type="checkbox" id="checkAll" /></th>
+                                    <th class="text-center">学号</th>
+                                    <th class="text-center">姓名</th>
+                                    <th class="text-center">单位名称</th>
+                                    <th class="text-center">院系</th>
+                                    <th class="text-center">专业</th>
+                                    <th class="text-center">学历</th>
+                                    <th class="text-center">毕业时间</th>
+                                    <th class="text-center">签约状态</th>
+                                    <th class="text-center">审核状态</th>
+                                    <th class="text-center">详情</th>
+                                    <th class="text-center">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<nav aria-label="Page navigation" style="text-align: center;">
+                    <ul class="page" maxshowpageitem="10" pagelistcount="5"  id="page"></ul>
+               </nav>
+               <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pull-right">
+	            	<select id="number" class="form-control ">
+	            		<option value="10">一页显示10条数据</option>
+	            		<option value="20">一页显示20条数据</option>
+	            		<option value="50">一页显示50条数据</option>
+	            	</select>
+	           </div>
+            	<div class="modal fade " id="tc" tabindex="-1">  <!--模态框声明-->
+					<div class="modal-dialog"> <!--模态框窗口-->
+						<div class="modal-content"> <!--模态框内容-->
+							<div class="modal-header">
+								<button class="close" data-dismiss="modal"><span>&times;</span></button>
+							</div>
+							<div class="modal-body clearfix">
+								<div class="col-lg-12" style="margin-bottom: 20px;">
+									<label id="label" class="col-lg-12"></label>
+								</div>
+							</div>
+							<div class="modal-footer">
+							</div>
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+<script type="text/javascript">
+if($(".dep").val()!="00"){
+	$(".department").css({"display":"none"})
+}
+</script>
+</html>

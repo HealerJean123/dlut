@@ -5,7 +5,7 @@ spring:
     favicon:
       enabled: false
   datasource:
-     url : jdbc:postgresql://114.55.4.99:5432/dlut?useUnicode=true&characterEncoding=UTF-8
+     url : jdbc:postgresql://localhost:5432/dlut?useUnicode=true&characterEncoding=UTF-8
      username : postgres
      password : q3nzqd63jrk3gvqmdtzc6ui33mqiefj6
   jpa:
